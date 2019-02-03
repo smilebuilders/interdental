@@ -1,0 +1,15 @@
+header {
+    background: #179f97;
+    nav {
+        ul {
+            li {
+                a {
+                    color: #ffffff;
+                    &:hover {
+                        color: #c1edd4;
+                    }
+                }
+            }
+        }
+    } 
+}

@@ -1,0 +1,101 @@
+.main {
+    padding: 50px 0;
+}
+// forms
+
+// tables
+table {
+    margin-bottom: 0!important;
+    thead {
+        background: #4f4f4f;
+        color: #fff;
+    }
+}
+
+// cards
+.card {
+  margin-bottom: 30px;
+}
+.card-header {
+    background: #4f4f4f;
+    color: #fff;
+}
+
+// search bar
+#search-patient {
+    background: #dee2e6;
+    padding: 20px 15px;
+    border: solid 1px #ddd;
+    margin: 30px 0;
+    border-radius: 5px;
+}
+.search-patient {
+  margin-bottom: 50px;
+}
+// Status Description
+.circle {
+    border-radius: 30px;
+    height: 25px;
+    width: 25px;
+    margin: 0 auto;
+    line-height: 26px;
+    text-align: center;
+    background-color: #DDD;
+    font-weight: 700;
+}
+.status-ok {
+    background-color: #6ab63e!important;
+    color: #017b27;
+}
+.status-no {
+    background-color: #e35a53!important;
+    color: #b82205;
+}
+.status-send {
+    background-color: #f5d327!important;
+    color: #a18648;
+}
+.status-nd {
+    background-color: #ddd !important;
+    color: #888;
+    font-size: .8em;
+}
+.status-claims {
+    background-color: #5B8AD1 !important;
+    color: #fff;
+}
+.status-partial {
+    background-color: #FF8000 !important;
+    color: #fff;
+}
+.status-client {
+    background-color: #5F61AF !important;
+    color: #fff;
+}
+
+#tableScroll {
+    height: 300px;
+    overflow: scroll;
+    margin-top: 20px;
+}
+table#teeth,
+table#noteeth {
+    td {
+        text-align: center;
+        &:hover {
+            background: #5B8AD1;
+            cursor: pointer;
+        }
+    }
+    td.selected {
+        background: #6ab63e;
+        color: #fff;
+    }
+    td.cell-disabled {
+        background: #ccc;
+        color: #8a8a8a;
+        &:hover {
+            cursor: text;
+        }
+    }
+}
