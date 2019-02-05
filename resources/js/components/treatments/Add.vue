@@ -127,7 +127,7 @@ export default {
         // get all treatments with the selected category
         getTreatments() {
             axios
-            .get("http://localhost:8000/treatments/get/" + this.selected)
+            .get("/treatments/get/" + this.selected)
             .then(response => (this.treatments = response.data));
             
         },

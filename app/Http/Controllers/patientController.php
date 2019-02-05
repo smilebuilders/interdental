@@ -103,20 +103,6 @@ class patientController extends Controller
         //
     }
 
-    public function search(Request $request)
-    {
-      global $param;
-      $param = $request->param;
-      $patients = Patient::where('user_id', Auth::user()->id)
-      ->where(function($query) {
-        $query->where('first_name', $GLOBALS['param'])
-              ->orWhere('last_name', $GLOBALS['param']);
-      })
-      ->get();
-
-      return view('index')->with('patients', $patients);
-    }
-
     public function treatments($id)
     {
       $patient = Patient::find($id);

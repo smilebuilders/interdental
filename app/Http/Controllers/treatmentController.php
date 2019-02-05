@@ -13,7 +13,7 @@ use Image;
 
 class treatmentController extends Controller
 {
-    public function index($category) {
+    public function getCategoryTreatments($category) {
         $treatments = Treatment::where('category', $category)->get();
         return $treatments;
     }
