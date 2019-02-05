@@ -14,8 +14,12 @@ use Image;
 class treatmentController extends Controller
 {
     public function getCategoryTreatments($category) {
+      try {
         $treatments = Treatment::where('category', $category)->get();
-        return $treatments;
+        return response()->json($treatments, '200');
+      } catch (\Exception $e) {
+        return $e->getMessage();
+      }
     }
 
     /**

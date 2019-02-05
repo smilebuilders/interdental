@@ -127,8 +127,11 @@ export default {
         // get all treatments with the selected category
         getTreatments() {
             axios
-            .get("/treatments/get/" + this.selected)
-            .then(response => (this.treatments = response.data));
+            .get("/treatment/get/" + this.selected)
+            .then(response => (this.treatments = response.data))
+            .catch(function(error) {
+              console.log(error);
+            });
             
         },
         // select current treatment for display info on state 2 

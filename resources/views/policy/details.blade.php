@@ -10,7 +10,7 @@
 
     <div class="col-sm-6 form-inline text-right">
     <policy-change-status v-bind:policy="{{$policy->id}}" v-bind:status="{{$policy->verified}}"></policy-change-status>
-      <a class="btn btn-primary ml-2" href="/Ultramed/PolicyHolder/Claims?PolicyholderId=6551">
+      <a class="btn btn-primary ml-2" href="{{ route('patient_claims', ['id' => $policy->patient->id])}}">
         <span>Claims</span>
       </a>
     </div>
