@@ -66,7 +66,7 @@ export default {
   methods: {
     getTreatments() {
       axios
-        .get('/patient/treatments/get/' + this.patient)
+        .get('/treatment/generated/' + this.patient)
         .then(response => (this.treatments = response.data));
     },
 

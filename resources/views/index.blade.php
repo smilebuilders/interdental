@@ -125,11 +125,11 @@
                   </div>
                 </a>
               </td>
-              <td> <a class="btn btn-success" href="{{ route('patient_treatments', [$patient->id]) }}"><span class="fa fa-search"></span></a> </td>
+              <td> 
+                <a class="btn btn-success" href="{{ route('patient_treatments', [$patient->id]) }}"><span class="fa fa-search"></span></a> 
+              </td>
               <td>
-                @if (isset($patient->policy))
-                  <a class="btn btn-success" href="{{ route('patient_benefits', [$patient->policy->id]) }}"><span class="fa fa-search"></span></a>
-                @endif
+                  <a class="btn btn-success" href="{{ route('patient_benefits', $patient->id) }}"><span class="fa fa-search"></span></a>
               </td>
             </tr>
           @endforeach

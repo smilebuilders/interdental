@@ -10,30 +10,13 @@ use App\Claim;
 use Auth;
 class patientController extends Controller
 {
-
-    public function showClaim($id)
-    {
-        $claim = Claim::find($id);
-        return view('claim.show')->with('claim', $claim);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function create()
     {
         // show create user form view
         return view('patient.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StorePatient $request)
     {
         // store patient
@@ -52,23 +35,12 @@ class patientController extends Controller
         return redirect()->route('index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function benefits($id)
     {
-        //
+      $policy = Policy::where('patient_id', $id)->first();
+      return view('patient.benefits')->with('policy', $policy);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
@@ -76,28 +48,14 @@ class patientController extends Controller
         return view('policy.forms.patient')->with('patient', $patient);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StorePatient $request, $id)
     {
-        //
         $patient = Patient::find($id);
         $patient->fill($request->all());
         $patient->save();
         return redirect()->route('policy', [$id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
@@ -106,7 +64,6 @@ class patientController extends Controller
     public function treatments($id)
     {
       $patient = Patient::find($id);
-    //   dd($patient->treatments);
       return view('patient.treatments')->with('patient',$patient);
     }
 

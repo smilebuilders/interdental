@@ -238,7 +238,7 @@ export default {
             }
             
             if(verified) {
-                axios.post('/treatments/post', {
+                axios.post('/treatment/store', {
                     number: teeth,
                     sc: this.sc,
                     df: this.df,

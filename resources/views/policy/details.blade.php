@@ -40,6 +40,4 @@
       @include('policy.cards.dependents')
     </div>
   </div>
-
-
 @endsection

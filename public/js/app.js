@@ -47783,7 +47783,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             if (verified) {
-                axios.post('/treatments/post', {
+                axios.post('/treatment/store', {
                     number: teeth,
                     sc: this.sc,
                     df: this.df,
@@ -52221,7 +52221,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getTreatments: function getTreatments() {
       var _this = this;
 
-      axios.get('/patient/treatments/get/' + this.patient).then(function (response) {
+      axios.get('/treatment/generated/' + this.patient).then(function (response) {
         return _this.treatments = response.data;
       });
     },
