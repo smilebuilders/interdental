@@ -47673,7 +47673,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getTreatments: function getTreatments() {
             var _this = this;
 
-            axios.get("/treatment/get/" + this.selected).then(function (response) {
+            axios.get("http://165.227.58.35/treatment/get/" + this.selected).then(function (response) {
                 return _this.treatments = response.data;
             }).catch(function (error) {
                 console.log(error);
