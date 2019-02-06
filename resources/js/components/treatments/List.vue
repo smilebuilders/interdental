@@ -1,4 +1,5 @@
 <template>
+
 <div>
 <table class="table table-striped" id="table_0">
     <thead class="th-listado">
