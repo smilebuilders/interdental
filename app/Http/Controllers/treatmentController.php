@@ -62,12 +62,11 @@ class treatmentController extends Controller
     if($request->hasFile('image')) {
       foreach ($request->image as $image) {
         $filename = time() . '.' . $image->getClientOriginalExtension();
-        Image::make($image)->save(public_path('uploads/'.$filename));
-        $thumb = Image::make($image);
-        $thumb->save(public_path('uploads/thumbs/'.$filename));
-        
+        $img = Image::make($image);
+        Storage::disk('spaces')->put('uploads/' . $filename, $img->stream(), 'public');
+  
         $img = new TreatmentImage;
-        $img->patient_id = $request->patient_id;
+        $img->patient_treatment_id = $request->treatment_id;
         $img->filename = $filename;
         $img->save();
       }
@@ -76,12 +75,15 @@ class treatmentController extends Controller
   }
   // eliminar imagen de tratamiento
   public function deleteImage(Request $request) {
-    $img = TreatmentImage::find($request->image_id);
-    \File::delete(public_path('uploads/'.$img->filename));
-    \File::delete(public_path('uploads/thumbs/'.$img->filename));
+    try {
+      $img = TreatmentImage::find($request->image_id);
+      Storage::disk('spaces')->delete('uploads/' . $img->filename);
+      $img->delete();
+      return response()->json(['message' => 'ok'], 200);
+    } catch(\Exception $e) {
+      return $e->getMessage();
+    }
     
-    $img->delete();
-    return back();
   }
 
   public function getGeneratedTreatments($id) {
@@ -99,6 +101,12 @@ class treatmentController extends Controller
     } catch (\Exception $e) {
       return $e->getMessage();
     }
+  }
+
+  public function getTreatment($id) {
+    $treatment = PatientTreatment::find($id);
+    $images = $treatment->images()->get();
+    return($images);
   }
 
 }

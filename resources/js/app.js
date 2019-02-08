@@ -37,7 +37,8 @@ const app = new Vue({
       return {
         isOrtho: null,
         isProsthesis: null,
-        previusExtractions: null
+        previusExtractions: null,
+        test: '',
       }
     },
     created() {
@@ -54,6 +55,7 @@ const app = new Vue({
       },
       validatePreviusExtractions: function() {
           this.previusExtractions = $('#previusExtractions').prop('checked');
-      }
+      },
+      
     }
 });

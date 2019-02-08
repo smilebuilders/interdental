@@ -12,7 +12,7 @@ export default {
         deleteTreatment() {
             var r = confirm('Estas seguro que quieres eliminar' + this.treatment);
             if(r) {
-                axios.post('/treatments/delete/' + this.treatment)
+                axios.post('/treatment/delete/' + this.treatment)
             .then(function (response) {
                 location.reload();
             })

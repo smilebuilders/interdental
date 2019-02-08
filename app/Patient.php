@@ -27,10 +27,6 @@ class Patient extends Model
     return $this->hasMany('App\Claim');
   }
 
-  public function images()
-  {
-    return $this->hasMany('App\TreatmentImage');
-  }
 
   protected $fillable = [
     'first_name',

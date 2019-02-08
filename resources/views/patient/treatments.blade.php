@@ -46,9 +46,8 @@
         </tbody>
     </table>
 </div>
-@include('layout.modals.upload_image')
-
 <treatments-list v-bind:patient="{{ $patient->id }}"></treatments-list>
+{{-- @include('layout.modals.upload_image') --}}
 
 {{-- Add treatment MODAL --}}
 <add-treatment patient="{!! $patient->id !!}"/>

@@ -1,5 +1,4 @@
 <template>
-
 <div>
 <table class="table table-striped" id="table_0">
     <thead class="th-listado">
@@ -33,7 +32,7 @@
           <div v-else class="status-send circle" style="margin:0">{{treatment.status}}</div>
         </td>
         <td>
-          <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#uploadImage">
+          <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#uploadImage" v-on:click="setImageId(treatment.id)">
               <i class="fa fa-plus text-white"></i>
           </a>
         </td>
@@ -44,21 +43,27 @@
     <div class="col-sm-12 text-center" v-if="checkedTreatments.length > 0">
         <button class="btn btn-success btn-lg mt-3" v-on:click="sendTreatments">Enviar tratamiento</button>
     </div>
+
+    <treatment-images v-bind:images="images"></treatment-images>
+
 </div>
 </template>
 
 <script>
 import Delete from "./Delete.vue";
+import Images from "../treatments/Images.vue";
 
 export default {
   components: {
-    "delete-treatment": Delete
+    "delete-treatment": Delete,
+    "treatment-images": Images
   },
   props: ["patient"],
   data() {
     return {
       treatments: [],
       checkedTreatments: [],
+      images: null,
     };
   },
   beforeMount() {
@@ -77,13 +82,20 @@ export default {
             patient: this.patient
         })
         .then(function(response) {
-            // console.log(response);
             location.reload();
         })
         .catch(function(error) {
             console.log(error);
         });
+    },
+
+    setImageId(id) {
+      $('input[name="treatment_id"]').val(id);
+      axios
+      .get('/treatment/' + id)
+      .then(response => (this.images = response.data));
     }
+
   }
 }
 </script>

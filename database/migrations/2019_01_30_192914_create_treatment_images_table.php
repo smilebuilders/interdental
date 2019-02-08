@@ -16,8 +16,8 @@ class CreateTreatmentImagesTable extends Migration
         Schema::create('treatment_images', function (Blueprint $table) {
             $table->increments('id');
             $table->string('filename');
-            $table->unsignedInteger('patient_id');
-            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            $table->unsignedInteger('patient_treatment_id');
+            $table->foreign('patient_treatment_id')->references('id')->on('patients_treatments')->onDelete('cascade');
 
             $table->timestamps();
         });

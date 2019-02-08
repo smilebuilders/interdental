@@ -8,24 +8,26 @@
         </button>
       </div>
       <div class="modal-body">
-
         <form enctype="multipart/form-data" id="uploadImageForm" action="{{ route('treatment_add_image') }}" method="post">
           {{ csrf_field() }}
           <div class="input-group mb-3">
             <div class="custom-file">
               <input type="file" name="image[]" value="" multiple>
             </div>
-            <input type="hidden" name="patient_id" value="{{ $patient->id }}">
+            <input type="hidden" name="treatment_id" value="">
           </div>
         </form>
         <table class="table">
           <thead>
-            <th>Image</th>
+            <th>Imagen</th>
             <th></th>
           </thead>
           <tbody>
-            @foreach ($patient->images as $image)
-                <tr>
+            {{-- @foreach ($patient->treatments as $treatment)
+                {{dd($treatment->images())}}
+            @endforeach --}}
+            {{-- @foreach ($patient->images as $image) --}}
+                {{-- <tr>
                   <td>
                   <img src="{{asset('uploads/' . $image->filename)}}" alt="" width="50px">
                   </td>
@@ -36,8 +38,9 @@
                       <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button>
                     </form>
                   </td>
-                </tr>
-            @endforeach
+                </tr> --}}
+            {{-- @endforeach --}}
+            <treatments-images>
           </tbody>
         </table>
       </div>

@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/extra_coverage/edit/{id}', 'policyController@extraCoverage')->name('policy_extra_coverage_edit');
   });
   
-  Route::prefix('treatments')->group(function() {
+  Route::prefix('treatment')->group(function() {
     Route::post('/delete/{id}', 'treatmentController@delete');
     Route::post('/send', 'treatmentController@send');
     
@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
   
   // ajax routes
   Route::get('/treatment/get/{category}', 'treatmentController@getCategoryTreatments');
+  Route::get('/treatment/{id}', 'treatmentController@getTreatment');
   Route::get('/treatment/generated/{id}', 'treatmentController@getGeneratedTreatments');
   Route::post('/treatment/store', 'treatmentController@store');
   Route::post('/policy/change-status', 'policyController@changeStatus');
