@@ -52236,7 +52236,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     sendTreatments: function sendTreatments() {
-      axios.post('/treatments/send', {
+      axios.post('/treatment/send', {
         treatments: this.checkedTreatments,
         patient: this.patient
       }).then(function (response) {
@@ -52550,6 +52550,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__treatments_Delete_vue__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__treatments_Delete_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__treatments_Delete_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__treatments_Images_vue__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__treatments_Images_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__treatments_Images_vue__);
 //
 //
 //
@@ -52595,17 +52597,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        'delete-treatment': __WEBPACK_IMPORTED_MODULE_0__treatments_Delete_vue___default.a
+        'delete-treatment': __WEBPACK_IMPORTED_MODULE_0__treatments_Delete_vue___default.a,
+        "treatment-images": __WEBPACK_IMPORTED_MODULE_1__treatments_Images_vue___default.a
     },
     props: ['claim', 'status'],
     data: function data() {
         return {
             treatments: [],
-            checkedTreatments: []
+            checkedTreatments: [],
+            images: null
         };
     },
     beforeMount: function beforeMount() {
@@ -52630,6 +52641,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        setImageId: function setImageId(id) {
+            var _this2 = this;
+
+            $('input[name="treatment_id"]').val(id);
+            axios.get('/treatment/' + id).then(function (response) {
+                return _this2.images = response.data;
+            });
         }
     }
 });
@@ -52642,114 +52661,140 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticStyle: { width: "100%" } }, [
-    _c("table", { staticClass: "table table-striped" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.treatments, function(treatment) {
-          return _c("tr", { key: treatment.id }, [
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.checkedTreatments,
-                    expression: "checkedTreatments"
-                  }
-                ],
-                attrs: { type: "checkbox" },
-                domProps: {
-                  value: treatment.id,
-                  checked: Array.isArray(_vm.checkedTreatments)
-                    ? _vm._i(_vm.checkedTreatments, treatment.id) > -1
-                    : _vm.checkedTreatments
-                },
-                on: {
-                  change: function($event) {
-                    var $$a = _vm.checkedTreatments,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = treatment.id,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 && (_vm.checkedTreatments = $$a.concat([$$v]))
+  return _c(
+    "div",
+    { staticStyle: { width: "100%" } },
+    [
+      _c("table", { staticClass: "table table-striped" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.treatments, function(treatment) {
+            return _c("tr", { key: treatment.id }, [
+              _c("td", [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.checkedTreatments,
+                      expression: "checkedTreatments"
+                    }
+                  ],
+                  attrs: { type: "checkbox" },
+                  domProps: {
+                    value: treatment.id,
+                    checked: Array.isArray(_vm.checkedTreatments)
+                      ? _vm._i(_vm.checkedTreatments, treatment.id) > -1
+                      : _vm.checkedTreatments
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.checkedTreatments,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = treatment.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.checkedTreatments = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.checkedTreatments = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
                       } else {
-                        $$i > -1 &&
-                          (_vm.checkedTreatments = $$a
-                            .slice(0, $$i)
-                            .concat($$a.slice($$i + 1)))
+                        _vm.checkedTreatments = $$c
                       }
-                    } else {
-                      _vm.checkedTreatments = $$c
                     }
                   }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(treatment.number))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(treatment.sc))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(treatment.df))]),
-            _vm._v(" "),
-            _c("td", [
+                })
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(treatment.number))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(treatment.sc))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(treatment.df))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success btn-sm",
+                    attrs: {
+                      "data-toggle": "modal",
+                      href: "#",
+                      "data-target": "#myModal"
+                    }
+                  },
+                  [
+                    _c("span", { staticClass: "fa fa-edit" }),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(treatment.code) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(treatment.description))]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Actual Services")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(treatment.date))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success btn-sm",
+                    attrs: {
+                      "data-toggle": "modal",
+                      "data-target": "#uploadImage"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.setImageId(treatment.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-plus text-white" })]
+                )
+              ]),
+              _vm._v(" "),
               _c(
-                "a",
-                {
-                  staticClass: "btn btn-success btn-sm",
-                  attrs: {
-                    "data-toggle": "modal",
-                    href: "#",
-                    "data-target": "#myModal"
-                  }
-                },
+                "td",
                 [
-                  _c("span", { staticClass: "fa fa-edit" }),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(treatment.code) +
-                      "\n                    "
-                  )
-                ]
+                  _c("delete-treatment", { attrs: { treatment: treatment.id } })
+                ],
+                1
               )
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(treatment.description))]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Actual Services")]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(treatment.date))]),
-            _vm._v(" "),
-            _vm._m(1, true),
-            _vm._v(" "),
+            ])
+          })
+        )
+      ]),
+      _vm._v(" "),
+      _vm.checkedTreatments.length > 0
+        ? _c("div", { staticClass: "col-sm-12 text-center" }, [
             _c(
-              "td",
-              [_c("delete-treatment", { attrs: { treatment: treatment.id } })],
-              1
+              "button",
+              {
+                staticClass: "btn btn-success btn-lg mt-3",
+                on: { click: _vm.generateClaim }
+              },
+              [_vm._v("Generar Claim")]
             )
           ])
-        })
-      )
-    ]),
-    _vm._v(" "),
-    _vm.checkedTreatments.length > 0
-      ? _c("div", { staticClass: "col-sm-12 text-center" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success btn-lg mt-3",
-              on: { click: _vm.generateClaim }
-            },
-            [_vm._v("Generar Claim")]
-          )
-        ])
-      : _vm._e()
-  ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("treatment-images", { attrs: { images: _vm.images } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -52783,25 +52828,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success btn-sm",
-          attrs: {
-            "data-toggle": "modal",
-            href: "#",
-            "data-target": "#imageModal"
-          }
-        },
-        [_vm._v("+")]
-      )
     ])
   }
 ]

@@ -77,7 +77,7 @@ export default {
     },
 
     sendTreatments() {
-        axios.post('/treatments/send', {
+        axios.post('/treatment/send', {
             treatments: this.checkedTreatments,
             patient: this.patient
         })

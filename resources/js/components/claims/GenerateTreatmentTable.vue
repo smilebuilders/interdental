@@ -30,7 +30,11 @@
                 <td>{{treatment.description}}</td>
                 <td>Actual Services</td>
                 <td>{{treatment.date}}</td>
-                <td><a class="btn btn-success btn-sm" data-toggle="modal" href="#" data-target="#imageModal">+</a></td>
+                <td>
+                  <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#uploadImage" v-on:click="setImageId(treatment.id)">
+                      <i class="fa fa-plus text-white"></i>
+                  </a>
+                </td>
                 <td>
                     <delete-treatment v-bind:treatment="treatment.id"></delete-treatment>
                 </td>
@@ -40,20 +44,25 @@
         <div class="col-sm-12 text-center" v-if="checkedTreatments.length > 0">
             <button class="btn btn-success btn-lg mt-3" v-on:click="generateClaim">Generar Claim</button>
         </div>
+
+        <treatment-images v-bind:images="images"></treatment-images>
 </div>
 </template>
 
 <script>
 import Delete from '../treatments/Delete.vue';
+import Images from "../treatments/Images.vue";
 export default {
     components: {
-        'delete-treatment': Delete
+        'delete-treatment': Delete,
+        "treatment-images": Images
     },
     props: ['claim', 'status'],
     data() {
         return {
             treatments: [],
-            checkedTreatments: []
+            checkedTreatments: [],
+            images: null
         }
     },
     beforeMount() {
@@ -77,6 +86,12 @@ export default {
             .catch(function(error) {
                 console.log(error);
             })
+        },
+        setImageId(id) {
+          $('input[name="treatment_id"]').val(id);
+          axios
+          .get('/treatment/' + id)
+          .then(response => (this.images = response.data));
         }
     }
 }
