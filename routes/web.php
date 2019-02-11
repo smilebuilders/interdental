@@ -58,4 +58,4 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/policy/change-status', 'policyController@changeStatus');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
