@@ -79,7 +79,7 @@ class treatmentController extends Controller
       $img = TreatmentImage::find($request->image_id);
       Storage::disk('spaces')->delete('uploads/' . $img->filename);
       $img->delete();
-      return response()->json(['message' => 'ok'], 200);
+      return response()->json(['message' => 'image-deleted'], 200);
     } catch(\Exception $e) {
       return $e->getMessage();
     }

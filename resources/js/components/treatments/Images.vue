@@ -31,12 +31,12 @@
               <th></th>
             </thead>
             <tbody>
-              <tr v-for="image in images" v-bind:key="image.id">
+              <tr v-for="(image, index) in images" v-bind:key="image.id">
                 <td>
                   <img v-bind:src="'https://interdental-solutions.sfo2.digitaloceanspaces.com' + '/uploads/' + image.filename" alt width="50px">
                 </td>
                 <td>
-                  <button class="btn btn-sm btn-danger" v-on:click="deleteImage(image.id)"><span class="fa fa-trash"></span></button>
+                  <button class="btn btn-sm btn-danger" v-on:click="deleteImage(index)"><span class="fa fa-trash"></span></button>
                 </td>
               </tr>
             </tbody>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+
 export default {
   props: ['images', 'treatment_id'],
   data() {
@@ -76,19 +77,16 @@ export default {
       })
       
     },
-    deleteImage: function(id) {
+    deleteImage: function(index) {
+      
       axios.post('/treatment/delete-image', {
-        'image_id': id
+        'image_id': this.images[index].id
       })
-      .then(function(response) {
+      .then(response => {
         console.log(response);
-        // pendiente borrar imagen de la lista
-      })
+        this.images.splice(index, 1);
+      });
     },
-    onFileChange: function(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      this.imgs = files;
-    }
   }
 }
 </script>
