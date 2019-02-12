@@ -52416,13 +52416,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52434,26 +52427,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    uploadImage: function uploadImage() {
-      var formData = new FormData();
-      formData.append('image', this.imgs);
-
-      axios.post('/treatment/upload-image', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {
-        console.log(response);
-      });
-    },
     deleteImage: function deleteImage(index) {
       var _this = this;
 
       axios.post('/treatment/delete-image', {
         'image_id': this.images[index].id
       }).then(function (response) {
-        console.log(response);
         _this.images.splice(index, 1);
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   }

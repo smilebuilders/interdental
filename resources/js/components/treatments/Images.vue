@@ -1,12 +1,5 @@
 <template>
-  <div
-    class="modal fade"
-    id="uploadImage"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="uploadImage"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="uploadImage" tabindex="-1" role="dialog" aria-labelledby="uploadImage" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -61,31 +54,19 @@ export default {
     }
   },
   methods: {
-    uploadImage: function() {
-      let formData = new FormData();
-      formData.append('image', this.imgs);
-      
-      axios.post('/treatment/upload-image', 
-        formData, 
-        {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function(response) {
-        console.log(response);
-        
-      })
-      
-    },
     deleteImage: function(index) {
       
       axios.post('/treatment/delete-image', {
         'image_id': this.images[index].id
       })
       .then(response => {
-        console.log(response);
         this.images.splice(index, 1);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
+
+
     },
   }
 }

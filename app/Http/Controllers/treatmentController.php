@@ -61,7 +61,7 @@ class treatmentController extends Controller
   public function uploadImage(Request $request) {
     if($request->hasFile('image')) {
       foreach ($request->image as $image) {
-        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $filename = substr(number_format(time() * rand(),0,'',''),0,10) . '.' . $image->getClientOriginalExtension();
         $img = Image::make($image);
         Storage::disk('spaces')->put('uploads/' . $filename, $img->stream(), 'public');
   
