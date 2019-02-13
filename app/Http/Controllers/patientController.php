@@ -32,7 +32,7 @@ class patientController extends Controller
         $policy->save();
 
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('message', 'Paciente creado correctamente');
     }
 
     public function benefits($id)

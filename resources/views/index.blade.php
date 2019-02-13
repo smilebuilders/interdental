@@ -1,6 +1,11 @@
 @extends('layout.app')
 @section('title', 'Ensurance')
 @section('content')
+
+  @if (session('message'))
+    @include('layout.common.messages')
+  @endif
+
   <div id="new-patient" class="row d-flex align-items-center">
     <div class="col-md-6">
       <h1>Listado de Pacientes</h1>
@@ -91,7 +96,7 @@
         </tr>
       </thead>
       <tbody>
-        @if (isset($patients))
+        @if (isset($patients) && count($patients) > 0)
           @foreach ($patients as $patient)
               <tr>
               <td>{!! $patient->first_name . ' ' . $patient->last_name !!}</td>
