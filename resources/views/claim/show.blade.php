@@ -40,11 +40,31 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <h3 class="mb-3">Claim: <span class="text-success">{{$claim->code}}</span></h3>
       <button class="btn btn-primary" data-toggle="modal" data-target="#infoClaim">Info Claim</button>
       <button class="btn btn-primary" data-toggle="collapse" data-target="#claimConfig">Configurar Claim</button>
       <button class="btn btn-primary" @if ($claim->type_of_transaction == null)disabled @endif>Claim</button>
+    </div>
+    
+    <div class="col-sm-6">
+      <form action="{{ route('claim_change_status') }}" class="form-inline float-right" method="POST">
+        @csrf
+        <div class="form-group">
+          <select name="status" class="form-control">
+            <option value="generated">Generado</option>
+            <option value="sent" {{ $claim->status == 'sent'? 'selected': '' }}>Enviado</option>
+            <option value="paid" {{ $claim->status == 'paid'? 'selected': '' }}>Pagado</option>
+            <option value="partial" {{ $claim->status == 'partial'? 'selected': '' }}>Partial</option>
+            <option value="paid_client" {{ $claim->status == 'paid_client'? 'selected': '' }}>Pagado al Cliente</option>
+            <option value="rejected" {{ $claim->status == 'rejected'? 'selected': '' }}>Rechazado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <input type="hidden" name="claim" value="{{$claim->id}}">
+        </div>
+      </form>
     </div>
   </div>
 

@@ -96,7 +96,7 @@
           </td>
           <td>{{\Carbon\Carbon::parse($claim->created_at)->format('m/d/Y')}}</td>
           <td class="text-center">
-            @if ($claim->status == 'created')
+            @if ($claim->status == 'generated')
               <div class="status-claims circle">G</div>
             @elseif($claim->status == 'sent')
               <div class="status-send circle">E</div>
@@ -104,9 +104,9 @@
               <div class="status-ok circle">✓</div>
             @elseif($claim->status == 'partial')
               <div class="status-partial circle">P</div>
-            @elseif($claim->status == 'paid_c')
+            @elseif($claim->status == 'paid_client')
               <div class="status-client circle">C</div>
-            @elseif($claim->status == 'no')
+            @elseif($claim->status == 'rejected')
               <div class="status-no circle">✘</div>
             @endif
 

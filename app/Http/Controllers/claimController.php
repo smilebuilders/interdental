@@ -43,7 +43,7 @@ class claimController extends Controller
   /**
   * recive un array de tratamientos y el id del claim
   * cambia el status de los tratamientos a 'claim'
-  * y el claim a created
+  * y el claim a "generated"
   */
   public function generateClaim(Request $request) {
     try {
@@ -53,7 +53,7 @@ class claimController extends Controller
         $treatment->save();
       }
       $claim = Claim::find($request->claim);
-      $claim->status = 'created';
+      $claim->status = 'generated';
       $claim->save();
       return response()->json(['msg' => 'Claim creado'], 200);
     } catch(\Exception $e) {
@@ -77,4 +77,14 @@ class claimController extends Controller
     $claim->save();
     return back();
   }
+
+  public function changeStatus(Request $request) {
+    $claim = Claim::find($request->claim);
+    $claim->status = $request->status;
+    $claim->save();
+    
+
+    return back()->with('message', 'Etado del claim actualizado');
+  }
+
 }

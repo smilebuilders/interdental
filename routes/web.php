@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::post('/update', 'claimController@update')->name('claim_update');
     Route::get('/show/{id}', 'claimController@show')->name('patient_show_claim');
+    Route::post('/change-status', 'claimController@changeStatus')->name('claim_change_status');
   });
   
   Route::get('/search', 'indexController@search')->name('patient_search');
