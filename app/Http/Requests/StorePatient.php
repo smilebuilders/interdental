@@ -28,7 +28,6 @@ class StorePatient extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'gender' => 'required',
-            'nss' => 'required',
             'policy_code' => 'required',
         ];
     }

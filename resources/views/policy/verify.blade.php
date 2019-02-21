@@ -9,7 +9,7 @@
             <th style="width: 30%">Nombre</th>
             <th style="width: 30%">Ultima verificación</th>
             <th style="width: 20%">Fecha Solicitado</label></th>
-            <th style="width: 20%" class="text-center">Dentista</label></th>
+            {{-- <th style="width: 20%" class="text-center">Dentista</label></th> --}}
         </tr>
     </thead>    
       
@@ -19,7 +19,7 @@
             <td><a href="{{ route('policy', [$policy->id]) }}">{!! $policy->patient->first_name !!}</a></td>
             <td>N/D</td>
             <td>{!! $policy->created_at->diffForHumans() !!}</td>
-            <td class="text-center">Ricardo  J. Guevara</td>
+            {{-- <td class="text-center">Ricardo  J. Guevara</td> --}}
         </tr>
     @endforeach
     </tbody>
