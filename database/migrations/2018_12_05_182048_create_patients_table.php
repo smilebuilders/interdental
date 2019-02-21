@@ -17,16 +17,16 @@ class CreatePatientsTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('birth_date');
+            $table->string('birth_date')->nullable();
             $table->enum('gender',['Hombre', 'Mujer']);
             $table->string('company')->nullable();
             $table->string('nss')->nullable();
             $table->string('policy_code')->nullable();
-            $table->string('address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('zip_code');
-            $table->string('phone');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('phone')->nullable();
 
             // para dependientes
             $table->boolean('is_dependent')->default(false);

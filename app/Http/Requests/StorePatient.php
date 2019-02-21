@@ -27,16 +27,9 @@ class StorePatient extends FormRequest
             //
             'first_name' => 'required',
             'last_name' => 'required',
-            'birth_date' => 'required',
             'gender' => 'required',
-            'company' => 'required',
             'nss' => 'required',
             'policy_code' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip_code' => 'required',
-            'phone' => 'required'
         ];
     }
 }
