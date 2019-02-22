@@ -5,7 +5,7 @@
   @if (session('message'))
     @include('layout.common.messages')
   @endif
-
+  
   <div id="new-patient" class="row d-flex align-items-center">
     <div class="col-md-6">
       <h1>Listado de Pacientes</h1>

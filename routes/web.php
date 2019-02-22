@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
   
   Route::get('/search', 'indexController@search')->name('patient_search');
   Route::get('/report', 'indexController@report')->name('report');
+  Route::get('/pdf/{claim_id}', 'indexController@pdf');
   
   // ajax routes
   Route::get('/treatment/get/{category}', 'treatmentController@getCategoryTreatments');
@@ -58,5 +59,6 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/treatment/store', 'treatmentController@store');
   Route::post('/policy/change-status', 'policyController@changeStatus');
 });
+
 
 Auth::routes(['register' => false]);

@@ -44,7 +44,9 @@
       <h3 class="mb-3">Claim: <span class="text-success">{{$claim->code}}</span></h3>
       <button class="btn btn-primary" data-toggle="modal" data-target="#infoClaim">Info Claim</button>
       <button class="btn btn-primary" data-toggle="collapse" data-target="#claimConfig">Configurar Claim</button>
-      <button class="btn btn-primary" @if ($claim->type_of_transaction == null)disabled @endif>Claim</button>
+      @if ($claim->type_of_transaction != null)
+        <a href="{{ url('/pdf', ['claim_id' => $claim->id]) }}" class="btn btn-success" target="new_blank">Claim</a>
+      @endif
     </div>
     
     <div class="col-sm-6">

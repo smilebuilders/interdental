@@ -24,6 +24,11 @@ class PatientTreatment extends Model
       return $this->hasMany('App\TreatmentImage');
     } 
 
+    public function treatment() 
+    {
+      return $this->belongsTo('App\Treatment');
+    } 
+
     protected $fillable = ['number', 'sc', 'df', 'code', 'description', 'date', 'images', 'patient_id'];
     protected $table = 'patients_treatments';
 
