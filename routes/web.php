@@ -13,6 +13,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/benefits/{id}', 'patientController@benefits')->name('patient_benefits');
     Route::get('/treatmets/{id}', 'patientController@treatments')->name('patient_treatments');
     Route::get('/claims/generated/{id}', 'claimController@generated')->name('patient_claims');
+
+    Route::get('/benefits-remainig/edit/{id}', 'patientController@editBenefits')->name('remaining_benefits_edit');
+    Route::post('/benefits-remainig/update/', 'patientController@updateBenefits')->name('remaining_benefits_update');
+    
+    Route::get('/ortho-remainig/edit/{id}', 'patientController@editortho')->name('remaining_ortho_edit');
+    Route::post('/ortho-remainig/update/', 'patientController@updateortho')->name('remaining_ortho_update');
   });
   
   Route::prefix('dependent')->group(function() {

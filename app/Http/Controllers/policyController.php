@@ -110,6 +110,10 @@ class policyController extends Controller
       $policy = Policy::find($id);
       return view('policy.forms.extra_coverage')->with('policy', $policy);
     }
+    public function benefits($id) {
+      $policy = Policy::find($id);
+      return view('policy.forms.benefits')->with('policy', $policy);
+    }
 
     public function changeStatus(Request $request) {
         try {

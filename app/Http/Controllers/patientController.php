@@ -50,10 +50,39 @@ class patientController extends Controller
 
     public function update(StorePatient $request, $id)
     {
+      dd($request);
         $patient = Patient::find($id);
         $patient->fill($request->all());
         $patient->save();
         return redirect()->route('policy', [$id]);
+    }
+
+    public function editBenefits($id) {
+      $policy = Policy::find($id);
+      return view('policy.forms.benefits')->with('policy', $policy);
+    }
+
+    public function updateBenefits(Request $request) {
+      foreach ($request->benefits as $patient_id=>$value ) {
+        $patient = Patient::find($patient_id);
+        $patient->remaining_benefits = $value;
+        $patient->save();
+      }
+      return back();
+    }
+
+    public function editOrtho($id) {
+      $policy = Policy::find($id);
+      return view('policy.forms.ortho')->with('policy', $policy);
+    }
+
+    public function updateOrtho(Request $request) {
+      foreach ($request->ortho as $patient_id=>$value ) {
+        $patient = Patient::find($patient_id);
+        $patient->remaining_ortho = $value;
+        $patient->save();
+      }
+      return back();
     }
 
     public function destroy($id)
