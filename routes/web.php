@@ -9,6 +9,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit/{id}', 'patientController@edit')->name('patient_edit');
     Route::post('/store', 'patientController@store')->name('patient_store');
     Route::post('/update/{id}', 'patientController@update')->name('patient_update');
+    Route::post('/delete/{id}', 'patientController@destroy')->name('patient_delete');
 
     Route::get('/benefits/{id}', 'patientController@benefits')->name('patient_benefits');
     Route::get('/treatmets/{id}', 'patientController@treatments')->name('patient_treatments');

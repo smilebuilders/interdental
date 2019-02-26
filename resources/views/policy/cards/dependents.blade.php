@@ -28,7 +28,10 @@
             <a class="btn btn-primary btn-sm" href="#"><span class="fa fa-edit"></span></a>
           </td>
           <td>
-            <a class="btn btn-danger btn-sm" href="#"><span class="fa fa-trash"></span></a>
+            <form action="{{ route('patient_delete',['id' => $dependent->id]) }}" method="POST">
+              @csrf
+              <button class="btn btn-danger btn-sm" type="submit"><span class="fa fa-trash"></span></button>
+            </form>
           </td>
         </tr>
       @endforeach
