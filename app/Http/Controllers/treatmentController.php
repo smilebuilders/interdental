@@ -17,7 +17,7 @@ class treatmentController extends Controller
   public function store(Request $request) {
     try {
       $treatment = new PatientTreatment;
-      $treatment->fill($request->all());
+      $treatment->fill($request->all()); 
       $treatment->save();
       return $treatment;
     } catch(\Exception $e) {

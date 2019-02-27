@@ -245,6 +245,7 @@ export default {
                     code: this.currentTreatment.code,
                     description: this.currentTreatment.name,
                     patient_id: this.patient,
+                    treatment_id: this.currentTreatment.id,
                     date: this.date
                 })
                 .then(function (response) {
