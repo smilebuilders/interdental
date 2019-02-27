@@ -25,8 +25,8 @@
         <label>Género</label>
         <select class="form-control" id="Gender" name="gender">
           <option value="1">- Seleccione -</option>
-          <option value="Hombre">Hombre</option>
-          <option value="Mujer">Mujer</option>
+          <option value="Hombre" {{ $patient->gender == 'Hombre' ? 'selected' : '' }}>Hombre</option>
+          <option value="Mujer" {{ $patient->gender == 'Mujer' ? 'selected' : '' }}>Mujer</option>
         </select>
         <span class="text-danger">{{ $errors->first('gender') }}</span>
       </div>
@@ -35,7 +35,7 @@
         <select class="form-control" id="insurance_id" name="insurance_id">
           <option value="">- Seleccione -</option>
           @foreach (App\Insurance::getInsurances() as $insurance)
-            <option value="{{ $insurance->id }}">{{ $insurance->name }}</option>
+            <option value="{{ $insurance->id }}" {{ $patient->insurance_id == $insurance->id ? 'selected' : '' }}>{{ $insurance->name }}</option>
           @endforeach
         </select>
         <span class="text-danger">{{ $errors->first('insurance_id') }}</span>

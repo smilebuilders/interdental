@@ -50,7 +50,6 @@ class patientController extends Controller
 
     public function update(StorePatient $request, $id)
     {
-      dd($request);
         $patient = Patient::find($id);
         $patient->fill($request->all());
         $patient->save();
