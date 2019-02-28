@@ -1,27 +1,43 @@
 @extends('layout.app')
-@section('title', 'Verificaciones Pendientes')
+@section('title', 'Detalles de Poliza')
 
 @section('content')
-<h1>Verificaciones Pendientes</h1>
-<table id="myTable" class="table table-striped table-condensed">
-    <thead>
-        <tr class="th-listado">
-            <th style="width: 30%">Nombre</th>
-            <th style="width: 30%">Ultima verificación</th>
-            <th style="width: 20%">Fecha Solicitado</label></th>
-            {{-- <th style="width: 20%" class="text-center">Dentista</label></th> --}}
-        </tr>
-    </thead>    
-      
-    <tbody>
-    @foreach($pending as $policy)
-        <tr>
-            <td><a href="{{ route('policy', [$policy->id]) }}">{!! $policy->patient->first_name !!}</a></td>
-            <td>N/D</td>
-            <td>{!! $policy->created_at->diffForHumans() !!}</td>
-            {{-- <td class="text-center">Ricardo  J. Guevara</td> --}}
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Detalle del Paciente</h1>
+
+    </div>
+
+    <div class="col-sm-6 form-inline text-right">
+    <policy-change-status v-bind:policy="{{$policy->id}}" v-bind:status="{{$policy->verified}}"></policy-change-status>
+      <a class="btn btn-primary ml-2" href="{{ route('patient_claims', ['id' => $policy->patient->id])}}">
+        <span>Claims</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      @include('policy.cards.patient')
+    </div>
+    <div class="col-sm-6">
+      @include('policy.cards.policy')
+    </div>
+    <div class="col-sm-6">
+      @include('policy.cards.coverage')
+    </div>
+    <div class="col-sm-6">
+      @include('policy.cards.extra_coverage')
+    </div>
+    <div class="col-sm-6">
+      @include('policy.cards.comments', ['patient' => $policy->patient])
+    </div>
+    <div class="col-sm-6">
+      @include('policy.cards.benefits')
+      @include('policy.cards.ortho')
+    </div>
+    <div class="col-sm-12">
+      @include('policy.cards.dependents')
+    </div>
+  </div>
 @endsection

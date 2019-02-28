@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header">
     <h3 class="d-inline">Dependientes</h3>
-    @if (Route::current()->getName() == 'policy')
+    @if (Route::current()->getName() == 'policy_verify')
       <a class="btn btn-primary float-right" href="{{ route('dependent_create', ['patient_id' => $policy->patient->id ]) }}">
         <span class="fa fa-plus"></span> Agregar Dependientes
       </a>

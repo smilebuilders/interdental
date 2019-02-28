@@ -13,48 +13,55 @@ class patientController extends Controller
   
     public function create()
     {
-        // show create user form view
+        // muestra la vista para crear un paciente 
         return view('patient.create');
     }
 
     public function store(StorePatient $request)
     {
-        // store patient
+        // Se registra un nuevo paciente
         $patient = new Patient;
         $patient->fill($request->all());
         $patient->user_id = $request->user()->id;
         $patient->save();
 
+        // Se crea la poliza correspondiente al usuario
         $policy = new Policy();
         $policy->code = $patient->policy_code;
         $policy->patient_id = $patient->id;
         $policy->user_id = $request->user()->id;
         $policy->save();
 
-
         return redirect()->route('index')->with('message', 'Paciente creado correctamente');
     }
 
+    public function edit($id)
+    {
+        // retorna la vista para editar paciente con los datos del paciente
+        $patient = Patient::find($id);
+        return view('policy.forms.patient')->with('patient', $patient);
+    }
+    
+    public function update(StorePatient $request, $id)
+    {
+        // Se guardan los cambios en el paciente
+        $patient = Patient::find($id);
+        $patient->fill($request->all());
+        $patient->save();
+
+        $policy = $patient->policy;
+        $policy->code = $patient->policy_code;
+        $policy->save();
+
+        return redirect()->route('policy_verify', ['policy_code' => $request->policy_code])->with('message', 'Paciente actualizado con éxito');
+    }
     public function benefits($id)
     {
       $policy = Policy::where('patient_id', $id)->first();
       return view('patient.benefits')->with('policy', $policy);
     }
 
-    public function edit($id)
-    {
-        //
-        $patient = Patient::find($id);
-        return view('policy.forms.patient')->with('patient', $patient);
-    }
 
-    public function update(StorePatient $request, $id)
-    {
-        $patient = Patient::find($id);
-        $patient->fill($request->all());
-        $patient->save();
-        return redirect()->route('policy', [$id]);
-    }
 
     public function editBenefits($id) {
       $policy = Policy::find($id);

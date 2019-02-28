@@ -28,8 +28,9 @@ Route::middleware(['auth'])->group(function () {
   });
   
   Route::prefix('policy')->group(function() {
-    Route::get('/pending', 'policyController@verify')->name('policy_verify');
-    Route::get('/details/{id}', 'policyController@index')->name('policy');
+    Route::get('/verify/{policy_code}', 'policyController@verify')->name('policy_verify');
+    Route::get('/pending', 'policyController@pendingVerification')->name('policies_pending');
+
     Route::get('/edit/{id}', 'policyController@edit')->name('policy_edit');
     Route::post('/update/{id}', 'policyController@update')->name('policy_update');
     Route::get('/coverage/edit/{id}', 'policyController@coverage')->name('policy_coverage_edit');

@@ -85,7 +85,7 @@
       </div>
     </div>
     <div class="col-sm-12 text-center btn-fix-bottom">
-      <a class="btn btn-default" href="{{ route('policy', [$patient->id]) }}">Cancelar</a>
+      <a class="btn btn-default" href="{{ route('policy_verify', [$patient->policy_code]) }}">Cancelar</a>
       <input id="btnGuardar" type="submit" value="Guardar" class="btn btn-primary">
     </div>
   </div>

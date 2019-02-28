@@ -1,12 +1,8 @@
 @extends('layout.app')
 @section('title', 'Ensurance')
 @section('content')
-
-  @if (session('message'))
-    @include('layout.common.messages')
-  @endif
   
-  <div id="new-patient" class="row d-flex align-items-center">
+  <div id="new-patient" class="row">
     <div class="col-md-6">
       <h1>Listado de Pacientes</h1>
     </div>
@@ -28,34 +24,26 @@
   </div> <!-- new and search patient -->
 
   <div class="patients-table row">
+
     <ul class="list-unstyled list-inline pull-right">
       <li><p>Descripción de estatus:</p></li>
-      <li class="list-inline-item">
-        <div class="status-ok circle">✓</div>
-      </li>
-      <li class="list-inline-item">
-        <strong>Si</strong>
-      </li>
-      <li class="list-inline-item">
-        <div class="status-no circle">✘</div>
-      </li>
-      <li class="list-inline-item">
-        <strong>No</strong>
-      </li>
-      <li class="list-inline-item">
-        <div class="status-send circle">R</div>
-      </li>
-      <li class="list-inline-item">
-        <strong>En Revisión</strong>
-      </li>
+
+      <li class="list-inline-item"><div class="status-ok circle">✓</div></li>
+      <li class="list-inline-item">Si</li>
+
+      <li class="list-inline-item"><div class="status-no circle">✘</div></li>
+      <li class="list-inline-item">No</li>
+
+      <li class="list-inline-item"><div class="status-send circle">R</div></li>
+      <li class="list-inline-item">En Revisión</li>
 
       <li class="list-inline-item"><div class="status-nd circle">N/D</div></li>
-      <li class="list-inline-item"><strong>No Disponible</strong></li>
+      <li class="list-inline-item">No Disponible</li>
+
       <li class="list-inline-item"><div class="status-claims circle">#</div></li>
-      <li class="list-inline-item"><strong>De Claims</strong></li>
-
-
+      <li class="list-inline-item">De Claims</li>
     </ul>
+
     <table class="table table-striped table-condensed">
       <thead>
         <tr class="head-row">
@@ -66,40 +54,22 @@
 
         </tr>
         <tr class="th-list">
-          <th style="width: 20%">
-            <label>Nombre</label>
-          </th>
-          <th style="width: 10%">
-            <label>NSS</label>
-          </th>
-          <th style="width: 10%">
-            <label>FDN</label>
-          </th>
-          <th style="width: 10%">
-            <label>Aseguradora</label>
-          </th>
-          <th style="width: 10%" class="text-center">
-            <label>Asegurado</label>
-          </th>
-          <th style="width: 10%" class="text-center">
-            <label>Verificado</label>
-          </th>
-          <th style="width: 10%" class="text-center">
-            <label>Claim</label>
-          </th>
-          <th style="width: 10%" class="text-center">
-            <label>Tratamientos</label>
-          </th>
-          <th style="width: 10%" class="text-center">
-            <label>Beneficios</label>
-          </th>
+          <th style="width: 20%">Nombre</th>
+          <th style="width: 10%">NSS</th>
+          <th style="width: 10%">FDN</th>
+          <th style="width: 10%">Aseguradora</th>
+          <th style="width: 10%" class="text-center">Asegurado</th>
+          <th style="width: 10%" class="text-center">Verificado</th>
+          <th style="width: 10%" class="text-center">Claim</th>
+          <th style="width: 10%" class="text-center">Tratamientos</th>
+          <th style="width: 10%" class="text-center">Beneficios</th>
         </tr>
       </thead>
       <tbody>
         @if (isset($patients) && count($patients) > 0)
           @foreach ($patients as $patient)
-              <tr>
-              <td>{!! $patient->first_name . ' ' . $patient->last_name !!}</td>
+            <tr>
+              <td><a href="{{ route('policy_verify', ['policy_code' => $patient->policy_code]) }}">{!! $patient->first_name . ' ' . $patient->last_name !!}</a></td>
               <td>{!! $patient->nss !!}</td>
               <td>{!! $patient->birth_date !!}</td>
               <td>{!! $patient->ensurance !!}</td>
@@ -131,10 +101,10 @@
                 </a>
               </td>
               <td> 
-                <a class="btn btn-success" href="{{ route('patient_treatments', [$patient->id]) }}"><span class="fa fa-search"></span></a> 
+                <a class="btn btn-success btn-sm" href="{{ route('patient_treatments', [$patient->id]) }}"><span class="fa fa-search"></span></a> 
               </td>
               <td>
-                  <a class="btn btn-success" href="{{ route('patient_benefits', $patient->id) }}"><span class="fa fa-search"></span></a>
+                  <a class="btn btn-success btn-sm" href="{{ route('patient_benefits', $patient->id) }}"><span class="fa fa-search"></span></a>
               </td>
             </tr>
           @endforeach

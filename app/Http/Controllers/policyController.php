@@ -7,27 +7,20 @@ use Illuminate\Http\Request;
 use Auth;
 class policyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function verify()
+    
+    public function verify($policy_code)
     {
-        //
-        $pendingVerify = Policy::where('verified', 1)->where('user_id', Auth::user()->id)->get();
-        return view('policy.verify')->with('pending', $pendingVerify);
+        // retorna una poliza con el policy_code 
+        $policy = Policy::where('code', $policy_code)->first();
+        return view('policy.verify')->with('policy', $policy);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($id)
+
+    
+    public function pendingVerification()
     {
-        //
-        $policy = Policy::where('id', $id)->first();
-        return view('policy.details')->with('policy', $policy);
+        // retorna las polizas pendientes de verificar
+        $policies = Policy::where('verified', 1)->where('user_id', Auth::user()->id)->get();
+        return view('policy.pending_verification')->with('policies', $policies);
     }
 
     /**
@@ -88,7 +81,12 @@ class policyController extends Controller
         $policy = Policy::find($id);
         $policy->fill($request->all());
         $policy->save();
-        return redirect()->route('policy',[$policy->patient->id]);
+
+        $patient = $policy->patient;
+        $patient->policy_code = $policy->code;
+        $patient->save();
+
+        return redirect()->route('policy_verify',[$policy->code])->with('message', 'Poliza actualizada con éxito');
     }
 
     /**

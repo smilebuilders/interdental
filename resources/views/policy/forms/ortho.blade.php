@@ -4,7 +4,7 @@
 @section('content')
 <div class="row justify-content-md-center">
   <div class="col-sm-4">
-    <h3 class="panel-title">Editar Beneficios</h3>
+    <h3 class="panel-title">Editar Ortho</h3>
     <form class="form" action="{{ route('remaining_ortho_update') }}" method="post">
       {{ csrf_field() }}
       <div class="form-group">
@@ -20,7 +20,7 @@
       @endforeach
 
       <div class="text-center">
-          <label class="btn btn-default">Cancelar</label></a>
+          <a class="btn btn-default" href="{{ route('policy_verify', [$policy->code]) }}">Regresar</a>
           <input id="btnGuardar" type="submit" value="Guardar" class="btn btn-primary">
       </div>
     </form>

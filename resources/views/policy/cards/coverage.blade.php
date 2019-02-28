@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header">
     <h3 class="d-inline">Cobertura</h3>
-    @if (Route::current()->getName() == 'policy')
+    @if (Route::current()->getName() == 'policy_verify')
     <a class="btn btn-primary float-right" href="{{ route('policy_coverage_edit', [$policy->id]) }}">
       <span class="fa fa-edit"></span> Cobertura
     </a>

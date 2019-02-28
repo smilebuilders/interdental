@@ -8,7 +8,7 @@
           <a class="nav-link" href="{{ route('index') }}">Pacientes <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('policy_verify') }}">Verificacion Poliza
+          <a class="nav-link" href="{{ route('policies_pending') }}">Verificacion Poliza
               @if (App\Policy::pending() > 0)
                   <span class="badge badge-light">{{App\Policy::pending()}}</span>
                   <span class="sr-only">unread messages</span>
