@@ -88,8 +88,7 @@ class treatmentController extends Controller
 
   public function getGeneratedTreatments($id) {
     $treatments = PatientTreatment::where('patient_id', $id)
-    ->where('status', '')
-    ->orWhere('status', 'r')
+    ->whereIn('status', ['', 'r'])
     ->get();
     return $treatments;
   }

@@ -3,30 +3,24 @@
 @section('content')
   
   <div id="new-patient" class="row">
-    <div class="col-md-6">
+    <div class="col-md-12 d-flex justify-content-between align-items-center">
       <h1>Listado de Pacientes</h1>
-    </div>
-    <div class="col-md-6">
-      <a class="btn btn-primary float-right" href="{{ route('patient_create') }}" role="button">Agregar Paciente</a>
+      <a class="btn btn-primary" href="{{ route('patient_create') }}" role="button">Agregar Paciente</a>
     </div>
   </div>
 
-  <div id="search-patient" class="row">
-    <form class="col-md-6" action="{{route('patient_search')}}" method="get">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-search"></i></span>
-        </div>
-        <input type="text" class="form-control" placeholder="Buscar" name="param">
-        <button class="btn btn-primary ml-3" type="submit">Buscar</button>
-      </div>
-    </form>
-  </div> <!-- new and search patient -->
 
-  <div class="patients-table row">
+  <div class="row d-flex justify-content-between align-items-center mt-3">
+
+    <form class="col-sm-6" action="{{route('patient_search')}}" method="get">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Nombre, Apellido" name="param">
+          <button class="btn btn-primary ml-3" type="submit"><i class="fa fa-search"></i> Buscar</button>
+        </div>
+    </form>
 
     <ul class="list-unstyled list-inline pull-right">
-      <li><p>Descripción de estatus:</p></li>
+      <li><strong>Descripción de estatus:</strong></li>
 
       <li class="list-inline-item"><div class="status-ok circle">✓</div></li>
       <li class="list-inline-item">Si</li>
@@ -44,78 +38,6 @@
       <li class="list-inline-item">De Claims</li>
     </ul>
 
-    <table class="table table-striped table-condensed">
-      <thead>
-        <tr class="head-row">
-
-          <td colspan="4"><strong>INFORMACION DE PACIENTE</strong></td>
-          <td colspan="3"><strong>ESTATUS</strong></td>
-          <td colspan="3"><strong>DETALLE </strong></td>
-
-        </tr>
-        <tr class="th-list">
-          <th style="width: 20%">Nombre</th>
-          <th style="width: 10%">NSS</th>
-          <th style="width: 10%">FDN</th>
-          <th style="width: 10%">Aseguradora</th>
-          <th style="width: 10%" class="text-center">Asegurado</th>
-          <th style="width: 10%" class="text-center">Verificado</th>
-          <th style="width: 10%" class="text-center">Claim</th>
-          <th style="width: 10%" class="text-center">Tratamientos</th>
-          <th style="width: 10%" class="text-center">Beneficios</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if (isset($patients) && count($patients) > 0)
-          @foreach ($patients as $patient)
-            <tr>
-              <td><a href="{{ route('policy_verify', ['policy_code' => $patient->policy_code]) }}">{!! $patient->first_name . ' ' . $patient->last_name !!}</a></td>
-              <td>{!! $patient->nss !!}</td>
-              <td>{!! $patient->birth_date !!}</td>
-              <td>{!! $patient->ensurance !!}</td>
-              <td>
-                @if (isset($patient->policy))
-                  @if ($patient->policy->status == 1)
-                    <div class="status-send circle">R</div>
-                  @elseif($patient->policy->status == 2)
-                    <div class="status-ok circle">✓</div>
-                  @elseif($patient->policy->status == 3)
-                    <div class="status-no circle">✘</div>
-                  @endif
-                @endif
-              </td>
-              <td>
-                @if (isset($patient->policy))
-                  @if ($patient->policy->verified == 1)
-                    <div class="status-send circle">R</div>
-                  @elseif($patient->policy->verified == 2 || $patient->policy->verified == 3)
-                    <div class="status-ok circle">✓</div>
-                  @endif
-                @endif
-              </td>
-              <td>
-                <a class="text-white" href="{{route('patient_claims',[$patient->id])}}">
-                  <div class="status-claims circle">
-                    {{count($patient->claimsCreated())}}
-                  </div>
-                </a>
-              </td>
-              <td> 
-                <a class="btn btn-success btn-sm" href="{{ route('patient_treatments', [$patient->id]) }}"><span class="fa fa-search"></span></a> 
-              </td>
-              <td>
-                  <a class="btn btn-success btn-sm" href="{{ route('patient_benefits', $patient->id) }}"><span class="fa fa-search"></span></a>
-              </td>
-            </tr>
-          @endforeach
-        @else
-          <tr>
-            <td colspan="9" class="text-center">
-              <label class="alert alert-danger">No se encontraron resultados</label>
-            </td>
-          </tr>
-        @endif
-      </tbody>
-    </table>
+    @include('layout.tables.search_patient')
   </div>
 @endsection
