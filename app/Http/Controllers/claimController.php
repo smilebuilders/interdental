@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PatientTreatment;
 use App\Patient;
 use App\Claim;
+use Auth;
 
 class claimController extends Controller
 {
@@ -14,7 +15,7 @@ class claimController extends Controller
   * y envia los claims con status 'pending'
   */
   public function pending() {
-    $claims = Claim::where('status', 'pending')->get();
+    $claims = Claim::where('status', 'pending')->where('user_id', Auth::id())->get();
     return view('claim.pending')->with('claims', $claims);
   }
 

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Claim extends Model
 {
@@ -30,7 +31,7 @@ class Claim extends Model
   }
 
   public static function pending() {
-    $pendings = Claim::where('status', 'pending')->get();
+    $pendings = Claim::where('status', 'pending')->where('user_id', Auth::id())->get();
     return count($pendings);
   }
 }

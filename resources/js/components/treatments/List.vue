@@ -79,7 +79,7 @@ export default {
     sendTreatments() {
         axios.post('/treatment/send', {
             treatments: this.checkedTreatments,
-            patient: this.patient
+            patient_id: this.patient
         })
         .then(function(response) {
             location.reload();
