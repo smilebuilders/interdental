@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title', 'Ensurance')
+@section('title', 'Interdental Solution')
 @section('content')
   
   <div id="new-patient" class="row">

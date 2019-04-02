@@ -24,11 +24,11 @@
         </tr>
         <tr>
           <td>NS</td>
-          <td>{{$claim->patient->nss}}</td>
+          <td>{{ $claim->patient->nss }}</td>
         </tr>
         <tr>
           <td>Aseguradora:</td>
-          <td>Aetna</td>
+          <td>{{ $claim->patient->insurance->name }}</td>
         </tr>
 
         <tr>

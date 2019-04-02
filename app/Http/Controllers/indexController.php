@@ -55,9 +55,11 @@ class indexController extends Controller
       $pdf->SetXY(8, 29);
       $pdf->Write(0, "x");
       // 3.
-      $pdf->SetFont('Arial','',8);
-      $pdf->SetXY(5, 55);
-      $pdf->Multicell(100, 3, $claim->patient->insurance->name, 0, 'C');
+      if($claim->patient->insurance->address != null) {
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(5, 55);
+        $pdf->Multicell(100, 3, $claim->patient->insurance->address, 0, 'C');
+      }
       // 12.
       $pdf->SetFont('Arial','',8);
       $pdf->SetXY(105, 45);
