@@ -121,12 +121,29 @@ class indexController extends Controller
       
       // 18.
       $pdf->SetFont('Arial','b',10);
-        if($claim->patient->is_dependent) {
+        // Si el paciente no es dependiente
+        if(!$claim->patient->is_dependent) {
           $pdf->SetXY(109.5, 86.5);
-          if($claim->patient->relation);
+          $pdf->Write(0, "x");
+          
         } else {
-          $pdf->SetXY(109.5, 86.5);
+          // Si es esposo
+          if($claim->patient->relation == "Esposo(a)") {
+            $pdf->SetXY(122, 86.5);
+            $pdf->Write(0, "x");
+          } 
+          // Si es hijo
+          else if($claim->patient->relation == "Hijo(a)") {
+            $pdf->SetXY(137, 86.5);
+            $pdf->Write(0, "x");
+          } 
+          // Otro
+          else {
+            $pdf->SetXY(159, 86.5);
+            $pdf->Write(0, "x");
+          }
         }
+        
       // 20.
       $pdf->SetFont('Arial','',8);
       $pdf->SetXY(105, 95);
