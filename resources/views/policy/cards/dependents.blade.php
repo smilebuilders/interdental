@@ -25,7 +25,7 @@
           <td>{{ $dependent->relation }}</td>
           <td>{{ $dependent->gender }}</td>
           <td>
-            <a class="btn btn-primary btn-sm" href="#"><span class="fa fa-edit"></span></a>
+            <a class="btn btn-primary btn-sm" href="{{ route('dependent_edit', ['id' => $dependent->id]) }}"><span class="fa fa-edit"></span></a>
           </td>
           <td>
             <form action="{{ route('patient_delete',['id' => $dependent->id]) }}" method="POST">

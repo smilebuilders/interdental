@@ -42,6 +42,7 @@ class Patient extends Model
     'zip_code',
     'phone',
     'insurance_id',
+    'relation'
   ];
 
   public function claimsCreated() {

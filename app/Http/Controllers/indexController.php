@@ -60,42 +60,73 @@ class indexController extends Controller
         $pdf->SetXY(5, 55);
         $pdf->Multicell(100, 3, $claim->patient->insurance->address, 0, 'C');
       }
-      // 12.
-      $pdf->SetFont('Arial','',8);
-      $pdf->SetXY(105, 45);
-      $pdf->Multicell(100, 3, 
-        $claim->patient->last_name . ', ' . 
-        $claim->patient->first_name . "\n" . 
-        $claim->patient->address . "\n" . 
-        $claim->patient->city . ', ' .
-        $claim->patient->state . ' ' . $claim->patient->zip_code, 0, 'C');
-      // 13.
-      $pdf->SetFont('Arial','',8);
-      $pdf->SetXY(107, 64);
-      $pdf->Multicell(30, 3, $claim->patient->birth_date, 0, 'C');
-      // 14.
-      $pdf->SetFont('Arial','b',10);
-      $claim->patient->gender == 'Hombre'? $pdf->SetXY(144, 66) : $pdf->SetXY(151, 66);
-      $pdf->Write(0, "x");
-      // 15.
-      $pdf->SetFont('Arial','',8);
-      $pdf->SetXY(162, 64);
-      $pdf->Cell(40, 3, $claim->patient->policy_code, 0, 'C');
-      // 17.
-      $pdf->SetFont('Arial','',8);
-      $pdf->SetXY(140, 72);
-      $pdf->Cell(40, 3, $claim->patient->company, 0, 'C');
+      
+      // 12 - 17 si es dependiente.
+      if($claim->patient->is_dependent) {
+        // 12.
+        $policyholder = Patient::find($claim->patient->patient_id);
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(105, 45);
+        $pdf->Multicell(100, 3, 
+          $policyholder->last_name . ', ' . 
+          $policyholder->first_name . "\n" . 
+          $policyholder->address . "\n" . 
+          $policyholder->city . ', ' .
+          $policyholder->state . ' ' . $policyholder->zip_code, 0, 'C');
+        // 13.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(107, 64);
+        $pdf->Multicell(30, 3, $policyholder->birth_date, 0, 'C');
+        // 14.
+        $pdf->SetFont('Arial','b',10);
+        $policyholder->gender == 'Hombre'? $pdf->SetXY(144, 66) : $pdf->SetXY(151, 66);
+        $pdf->Write(0, "x");
+        // 15.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(162, 64);
+        $pdf->Cell(40, 3, $policyholder->policy_code, 0, 'C');
+        // 17.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(140, 72);
+        $pdf->Cell(40, 3, $policyholder->company, 0, 'C');
+      } 
+      // 12 - 17 si no es dependiente
+      else {
+        // 12.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(105, 45);
+        $pdf->Multicell(100, 3, 
+          $claim->patient->last_name . ', ' . 
+          $claim->patient->first_name . "\n" . 
+          $claim->patient->address . "\n" . 
+          $claim->patient->city . ', ' .
+          $claim->patient->state . ' ' . $claim->patient->zip_code, 0, 'C');
+        // 13.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(107, 64);
+        $pdf->Multicell(30, 3, $claim->patient->birth_date, 0, 'C');
+        // 14.
+        $pdf->SetFont('Arial','b',10);
+        $claim->patient->gender == 'Hombre'? $pdf->SetXY(144, 66) : $pdf->SetXY(151, 66);
+        $pdf->Write(0, "x");
+        // 15.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(162, 64);
+        $pdf->Cell(40, 3, $claim->patient->policy_code, 0, 'C');
+        // 17.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(140, 72);
+        $pdf->Cell(40, 3, $claim->patient->company, 0, 'C');
+      }
+      
       // 18.
       $pdf->SetFont('Arial','b',10);
         if($claim->patient->is_dependent) {
-          /**
-           * si es dependiente
-           * 
-          */
+          $pdf->SetXY(109.5, 86.5);
+          if($claim->patient->relation);
         } else {
           $pdf->SetXY(109.5, 86.5);
         }
-        $pdf->Write(0, "x");
       // 20.
       $pdf->SetFont('Arial','',8);
       $pdf->SetXY(105, 95);

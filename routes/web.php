@@ -25,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
   Route::prefix('dependent')->group(function() {
     Route::get('/create/{patient_id}', 'dependentController@create')->name('dependent_create');
     Route::post('/store', 'dependentController@store')->name('dependent_store');
+    Route::get('/edit/{id}', 'dependentController@edit')->name('dependent_edit');
+    Route::post('/update/{id}', 'dependentController@update')->name('dependent_update');
   });
   
   Route::prefix('policy')->group(function() {
