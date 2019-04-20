@@ -143,7 +143,7 @@ class indexController extends Controller
             $pdf->Write(0, "x");
           }
         }
-        
+
       // 20.
       $pdf->SetFont('Arial','',8);
       $pdf->SetXY(105, 95);
@@ -193,6 +193,11 @@ class indexController extends Controller
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(189, 181);
         $pdf->Cell(15, 1, number_format($total, 2), 0, 0, 'R');
+
+        // 35.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(10, 188);
+        $pdf->Cell(15, 1, $claim->remarks, 0, 0, 'R');
 
       $pdf->Output();   
     }
