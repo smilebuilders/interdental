@@ -222,6 +222,29 @@ class indexController extends Controller
         $pdf->SetXY(70, 266);
         $pdf->Cell(20, 1, $interdental->snn, 0, 0, 'R');
 
+        // Dentista
+        $interdental = new Interdental;
+        // 53.
+        $pdf->SetFont('Arial','', 8);
+        $pdf->SetXY(110, 245);
+        $pdf->Multicell(80, 4, Auth::user()->doctor, 0, 'L');
+        // 54.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(112, 254.5);
+        $pdf->Cell(20, 1, Auth::user()->npi, 0, 0, 'L');
+        // 55.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(180, 254.5);
+        $pdf->Cell(20, 1, Auth::user()->license, 0, 0, 'L');
+        // 56.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(110, 260);
+        $pdf->Multicell(80, 4, Auth::user()->address, 0, 'L');
+        // 55.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(180, 271);
+        $pdf->Cell(20, 1, Auth::user()->add_provider_id, 0, 0, 'L');
+
       $pdf->Output();   
     }
 }
