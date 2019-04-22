@@ -171,6 +171,10 @@ class indexController extends Controller
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(10, $y);
         $pdf->Cell(24, 1, $treatment->date, 0, 0);
+        // 27.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(62, $y+.5);
+        $pdf->Write(0, $treatment->number);
         // 29.
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(94, $y);
@@ -198,7 +202,33 @@ class indexController extends Controller
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(10, 188);
         $pdf->Cell(15, 1, $claim->remarks, 0, 0, 'R');
+        
+        // Autorizacion
+        $interdental = new Interdental;
+        // 48.
+        $pdf->SetFont('Arial','', 8);
+        $pdf->SetXY(15, 245);
+        $pdf->Multicell(80, 4, $interdental->address, 0, 'C');
+        // 49.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(10, 266);
+        $pdf->Cell(20, 1, $interdental->npi, 0, 0, 'R');
+        // 50.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(40, 266);
+        $pdf->Cell(20, 1, $interdental->license, 0, 0, 'R');
+        // 51.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(70, 266);
+        $pdf->Cell(20, 1, $interdental->snn, 0, 0, 'R');
 
       $pdf->Output();   
     }
+}
+
+Class Interdental {
+  public $address = 'Interdental Solutions/Ricardo J. Guevara' . "\n" . 'P.O.Box 181100' . "\n" . 'Coronado, CA 92178';
+  public $npi = '1740792902';
+  public $license = '2005619';
+  public $snn = '82-2382876';  
 }
