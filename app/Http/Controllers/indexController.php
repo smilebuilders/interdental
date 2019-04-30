@@ -194,7 +194,7 @@ class indexController extends Controller
         
         
         $y += 4.2;
-        $total += $treatment->treatment->price;
+        $total += $treatment->price;
       }
       
         // 32.
