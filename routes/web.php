@@ -68,6 +68,9 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/treatment/generated/{id}', 'treatmentController@getGeneratedTreatments');
   Route::post('/treatment/store', 'treatmentController@store');
   Route::post('/policy/change-status', 'policyController@changeStatus');
+  
+  Route::post('/ajax/update-price', 'ajaxController@updatePrice');
+
 });
 
 

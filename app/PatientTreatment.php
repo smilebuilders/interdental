@@ -29,7 +29,7 @@ class PatientTreatment extends Model
       return $this->belongsTo('App\Treatment');
     } 
 
-    protected $fillable = ['number', 'sc', 'df', 'code', 'description', 'date', 'images', 'patient_id', 'treatment_id'];
+    protected $fillable = ['number', 'sc', 'df', 'code', 'description', 'date', 'images', 'patient_id', 'treatment_id', 'price'];
     protected $table = 'patients_treatments';
 
     protected $dates = ['deleted_at'];

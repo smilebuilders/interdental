@@ -22,6 +22,7 @@ Vue.component('treatments-list', require('./components/treatments/List.vue'));
 Vue.component('claim-treatments-list', require('./components/claims/GenerateTreatmentTable.vue'));
 Vue.component('policy-change-status', require('./components/policies/ChangeStatus.vue'));
 
+Vue.component('edit-price', require('./components/treatments/EditPrice.vue'));
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 

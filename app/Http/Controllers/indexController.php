@@ -190,7 +190,7 @@ class indexController extends Controller
         // 31.
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(189, $y);
-        $pdf->Cell(15, 1, number_format($treatment->treatment->price, 2), 0, 0, 'R');
+        $pdf->Cell(15, 1, number_format($treatment->price, 2), 0, 0, 'R');
         
         
         $y += 4.2;

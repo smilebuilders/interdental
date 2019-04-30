@@ -14219,6 +14219,7 @@ Vue.component('treatments-list', __webpack_require__(109));
 Vue.component('claim-treatments-list', __webpack_require__(116));
 Vue.component('policy-change-status', __webpack_require__(119));
 
+Vue.component('edit-price', __webpack_require__(127));
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
@@ -47840,7 +47841,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     description: this.currentTreatment.name,
                     patient_id: this.patient,
                     treatment_id: this.currentTreatment.id,
-                    date: this.date
+                    date: this.date,
+                    price: this.currentTreatment.price
                 }).then(function (response) {
                     console.log(response);
                     location.reload();
@@ -53394,6 +53396,171 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(129)
+/* template */
+var __vue_template__ = __webpack_require__(128)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/treatments/EditPrice.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4896f314", Component.options)
+  } else {
+    hotAPI.reload("data-v-4896f314", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "span",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: this.disabled == true,
+            expression: "this.disabled == true"
+          }
+        ],
+        on: { dblclick: this.edit }
+      },
+      [_vm._v(_vm._s(_vm.price) + ".00")]
+    ),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: this.disabled == false,
+          expression: "this.disabled == false"
+        },
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.price,
+          expression: "price"
+        }
+      ],
+      attrs: { type: "text" },
+      domProps: { value: _vm.price },
+      on: {
+        keyup: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.edit($event)
+        },
+        blur: this.edit,
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.price = $event.target.value
+        }
+      }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4896f314", module.exports)
+  }
+}
+
+/***/ }),
+/* 129 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['treatment'],
+  data: function data() {
+    return {
+      price: this.treatment.price,
+      disabled: true
+    };
+  },
+
+  methods: {
+    edit: function edit(event) {
+      this.disabled = !this.disabled;
+      this.update();
+    },
+    update: function update() {
+      axios.post('/ajax/update-price', {
+        id: this.treatment.id,
+        price: this.price
+      }).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
+});
 
 /***/ })
 /******/ ]);

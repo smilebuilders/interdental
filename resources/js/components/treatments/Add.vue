@@ -246,7 +246,8 @@ export default {
                     description: this.currentTreatment.name,
                     patient_id: this.patient,
                     treatment_id: this.currentTreatment.id,
-                    date: this.date
+                    date: this.date,
+                    price:this.currentTreatment.price
                 })
                 .then(function (response) {
                     console.log(response);

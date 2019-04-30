@@ -106,6 +106,7 @@
         <th>Descripción del Tratamiento</th>
         <th>Fecha</th>
         <th>Imagen</th>
+        <th>Valor</th>
       </tr>
     </thead>
     <tbody>
@@ -122,6 +123,9 @@
               <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#imageModal">
                 <i class="fa fa-plus text-white"></i>
               </a>
+            </td>
+            <td class="text-right">
+              <edit-price v-bind:treatment="{{ $treatment }}"></edit-price>
             </td>
           </tr>
         @endif
