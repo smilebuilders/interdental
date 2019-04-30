@@ -18,35 +18,49 @@
       <li class>
         <a tabindex="0">
           <label class="checkbox">
-            <input type="checkbox" value="Mesial" v-model="checkedSurfaces"> Mesial
+            <input type="checkbox" value="M" v-model="checkedSurfaces"> Mesial
           </label>
         </a>
       </li>
       <li>
         <a tabindex="0">
           <label class="checkbox">
-            <input type="checkbox" value="Distal" v-model="checkedSurfaces"> Distal
+            <input type="checkbox" value="D" v-model="checkedSurfaces"> Distal
           </label>
         </a>
       </li>
       <li>
         <a tabindex="0">
           <label class="checkbox">
-            <input type="checkbox" value="Buccal" v-model="checkedSurfaces"> Buccal
+            <input type="checkbox" value="B" v-model="checkedSurfaces"> Buccal
           </label>
         </a>
       </li>
       <li>
         <a tabindex="0">
           <label class="checkbox">
-            <input type="checkbox" value="Lingual" v-model="checkedSurfaces"> Lingual
+            <input type="checkbox" value="L" v-model="checkedSurfaces"> Lingual
           </label>
         </a>
       </li>
       <li>
         <a tabindex="0">
           <label class="checkbox">
-            <input type="checkbox" value="Occlusal" v-model="checkedSurfaces"> Occlusal
+            <input type="checkbox" value="O" v-model="checkedSurfaces"> Occlusal
+          </label>
+        </a>
+      </li>
+      <li class>
+        <a tabindex="0">
+          <label class="checkbox">
+            <input type="checkbox" value="F" v-model="checkedSurfaces"> Facial
+          </label>
+        </a>
+      </li>
+      <li class>
+        <a tabindex="0">
+          <label class="checkbox">
+            <input type="checkbox" value="I" v-model="checkedSurfaces"> Incisal
           </label>
         </a>
       </li>

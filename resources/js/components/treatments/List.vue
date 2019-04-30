@@ -83,6 +83,7 @@ export default {
         })
         .then(function(response) {
             location.reload();
+            console.log(response);
         })
         .catch(function(error) {
             console.log(error);

@@ -249,7 +249,7 @@ export default {
                     date: this.date
                 })
                 .then(function (response) {
-                    // console.log(response);
+                    console.log(response);
                     location.reload();
                 })
                 .catch(function (error) {

@@ -58,7 +58,7 @@ class indexController extends Controller
       if($claim->patient->insurance->address != null) {
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(5, 55);
-        $pdf->Multicell(100, 3, $claim->patient->insurance->address, 0, 'C');
+        $pdf->Multicell(100, 3, $claim->patient->insurance->name . "\n" . $claim->patient->insurance->address, 0, 'C');
       }
       
       // 12 - 17 si es dependiente.
@@ -174,13 +174,17 @@ class indexController extends Controller
         // 27.
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(62, $y+.5);
-        $pdf->Write(0, $treatment->number);
+        $pdf->cell(3, 1, $treatment->number, 0, 0, 'C');
+        // 28.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(80, $y);
+        $pdf->Cell(14, 1, $treatment->sc, 0, 0, 'C');
         // 29.
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(94, $y);
         $pdf->Cell(15, 1, $treatment->treatment->code, 0, 0);
         // 30.
-        $pdf->SetFont('Arial','',8);
+        $pdf->SetFont('Arial','',7);
         $pdf->SetXY(130, $y);
         $pdf->Cell(55, 1, $treatment->treatment->name, 0, 0);
         // 31.
@@ -201,8 +205,56 @@ class indexController extends Controller
         // 35.
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(10, 188);
-        $pdf->Cell(15, 1, $claim->remarks, 0, 0, 'R');
+        $pdf->Cell(15, 1, $claim->remarks, 0, 0, 'L');
+
+        // 36.
+        //signature
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(12, 210);
+        $pdf->Cell(15, 1, 'Signature on file', 0, 0, 'L');
+        //date
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(70, 210);
+        $pdf->Cell(15, 1, date("m/d/Y", strtotime($claim->created_at)), 0, 0, 'R');
+
+        // 37.
+        //signature
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(12, 226.5);
+        $pdf->Cell(15, 1, 'Signature on file', 0, 0, 'L');
+        //date
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(70, 226.5);
+        $pdf->Cell(15, 1, date("m/d/Y", strtotime($claim->created_at)), 0, 0, 'L');
         
+        // 38.
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(127, 197);
+        $pdf->Cell(3, 1, '11', 0, 0, 'C');
+        // 39.
+        $pdf->SetFont('Arial','b', 10);
+        $pdf->SetXY(179, 201);
+        $pdf->Cell(3, 1, 'x', 0, 0, 'C');
+        // 40.
+        if(!$claim->is_ortho) {
+          $pdf->SetFont('Arial','b', 10);
+          $pdf->SetXY(132, 209);
+          $pdf->Cell(3, 1, 'x', 0, 0, 'C');
+        } else {
+          $pdf->SetXY(110, 209);
+          $pdf->Cell(3, 1, 'x', 0, 0, 'C');
+          $pdf->SetFont('Arial','b', 10);
+        }
+        // 43.
+        if(!$claim->replacement_prosthesis) {
+          $pdf->SetFont('Arial','b', 10);
+          $pdf->SetXY(139.5, 217.5);
+          $pdf->Cell(3, 1, 'x', 0, 0, 'C');
+        } else {
+          $pdf->SetFont('Arial','b', 10);
+          $pdf->SetXY(132, 217.5);
+          $pdf->Cell(3, 1, 'x', 0, 0, 'C');
+        }
         // Autorizacion
         $interdental = new Interdental;
         // 48.

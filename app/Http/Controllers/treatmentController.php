@@ -19,7 +19,7 @@ class treatmentController extends Controller
       $treatment = new PatientTreatment;
       $treatment->fill($request->all()); 
       $treatment->save();
-      return $treatment;
+      return $request;
     } catch(\Exception $e) {
       return $e->getMessage();
     }    
@@ -39,7 +39,7 @@ class treatmentController extends Controller
     try {
       $claim = new Claim;
       $claim->code = time();
-      $claim->patient_id = $request->patient;
+      $claim->patient_id = $request->patient_id;
       $claim->user_id = Auth::user()->id;
       $claim->save();
       
