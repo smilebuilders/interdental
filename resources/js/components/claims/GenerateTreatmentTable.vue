@@ -3,7 +3,7 @@
         <table class="table table-striped">
         <thead>
             <tr>
-                <th><input type="checkbox" class="selectAllTreatments"></th>
+                <th><input type="checkbox" class="selectAllTreatments" v-model="selectAll"></th>
                 <th>No.</th>
                 <th>S / C</th>
                 <th>D.F.</th>
@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             <tr v-for="treatment in treatments" v-bind:key="treatment.id">
-                <td><input type="checkbox" v-bind:value="treatment.id" v-model="checkedTreatments"></td>
+                <td><input type="checkbox" v-model="selected" :value="treatment.id" number></td>
                 <td>{{treatment.number}}</td>
                 <td>{{treatment.sc}}</td>
                 <td>{{treatment.df}}</td>
@@ -41,7 +41,7 @@
             </tr>
         </tbody>
     </table>
-        <div class="col-sm-12 text-center" v-if="checkedTreatments.length > 0">
+        <div class="col-sm-12 text-center" v-if="selected.length > 0">
             <button class="btn btn-success btn-lg mt-3" v-on:click="generateClaim">Generar Claim</button>
         </div>
 
@@ -61,13 +61,30 @@ export default {
     data() {
         return {
             treatments: [],
-            checkedTreatments: [],
+            selected: [],
             images: null
         }
     },
     beforeMount() {
         this.getTreatments()
     },
+    computed: {
+    selectAll: {
+      get: function() {
+        return this.treatments ? this.selected.length == this.treatments.length : false;
+      }, 
+      set: function(value) {
+        var selected = [];
+
+        if(value) {
+          this.treatments.forEach(function (treatment) {
+            selected.push(treatment.id);
+          });
+        }
+        this.selected = selected;
+      }
+    }
+  },
     methods: {
         getTreatments() {
             axios.get('/claim/treatments/get/' + this.claim, {
@@ -76,7 +93,7 @@ export default {
         },
         generateClaim() {
             axios.post('/claim/generate', {
-                treatments: this.checkedTreatments,
+                treatments: this.selected,
                 claim: this.claim
             })
             .then(function(response){
