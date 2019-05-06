@@ -4,7 +4,7 @@
     <thead class="th-listado">
       <tr>
         <th>
-          <input type="checkbox" class="selectAllTreatments">
+          <input type="checkbox" class="selectAll" v-model="selectAll">
         </th>
         <th>No.</th>
         <th>S / C</th>
@@ -19,7 +19,7 @@
     <tbody>
       <tr v-for="treatment in treatments" v-bind:key="treatment.id">
         <td>
-          <input type="checkbox" v-bind:value="treatment.id" v-model="checkedTreatments">
+          <input type="checkbox" v-model="selected" :value="treatment.id" number>
         </td>
         <td>{{treatment.number}}</td>
         <td>{{treatment.sc}}</td>
@@ -40,7 +40,7 @@
     </tbody>
   </table>
 
-    <div class="col-sm-12 text-center" v-if="checkedTreatments.length > 0">
+    <div class="col-sm-12 text-center" v-if="selected.length > 0">
         <button class="btn btn-success btn-lg mt-3" v-on:click="sendTreatments">Enviar tratamiento</button>
     </div>
 
@@ -62,12 +62,29 @@ export default {
   data() {
     return {
       treatments: [],
-      checkedTreatments: [],
+      selected: [],
       images: null,
     };
   },
   beforeMount() {
     this.getTreatments();
+  },
+  computed: {
+    selectAll: {
+      get: function() {
+        return this.treatments ? this.selected.length == this.treatments.length : false;
+      }, 
+      set: function(value) {
+        var selected = [];
+
+        if(value) {
+          this.treatments.forEach(function (treatment) {
+            selected.push(treatment.id);
+          });
+        }
+        this.selected = selected;
+      }
+    }
   },
   methods: {
     getTreatments() {
@@ -75,10 +92,9 @@ export default {
         .get('/treatment/generated/' + this.patient)
         .then(response => (this.treatments = response.data));
     },
-
     sendTreatments() {
         axios.post('/treatment/send', {
-            treatments: this.checkedTreatments,
+            treatments: this.selected,
             patient_id: this.patient
         })
         .then(function(response) {

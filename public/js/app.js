@@ -14188,7 +14188,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(122);
+module.exports = __webpack_require__(125);
 
 
 /***/ }),
@@ -14219,7 +14219,7 @@ Vue.component('treatments-list', __webpack_require__(109));
 Vue.component('claim-treatments-list', __webpack_require__(116));
 Vue.component('policy-change-status', __webpack_require__(119));
 
-Vue.component('edit-price', __webpack_require__(127));
+Vue.component('edit-price', __webpack_require__(122));
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
@@ -52373,7 +52373,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       treatments: [],
-      checkedTreatments: [],
+      selected: [],
       images: null
     };
   },
@@ -52381,6 +52381,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.getTreatments();
   },
 
+  computed: {
+    selectAll: {
+      get: function get() {
+        return this.treatments ? this.selected.length == this.treatments.length : false;
+      },
+      set: function set(value) {
+        var selected = [];
+
+        if (value) {
+          this.treatments.forEach(function (treatment) {
+            selected.push(treatment.id);
+          });
+        }
+        this.selected = selected;
+      }
+    }
+  },
   methods: {
     getTreatments: function getTreatments() {
       var _this = this;
@@ -52391,7 +52408,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     sendTreatments: function sendTreatments() {
       axios.post('/treatment/send', {
-        treatments: this.checkedTreatments,
+        treatments: this.selected,
         patient_id: this.patient
       }).then(function (response) {
         location.reload();
@@ -52734,7 +52751,66 @@ var render = function() {
         "table",
         { staticClass: "table table-striped", attrs: { id: "table_0" } },
         [
-          _vm._m(0),
+          _c("thead", { staticClass: "th-listado" }, [
+            _c("tr", [
+              _c("th", [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectAll,
+                      expression: "selectAll"
+                    }
+                  ],
+                  staticClass: "selectAll",
+                  attrs: { type: "checkbox" },
+                  domProps: {
+                    checked: Array.isArray(_vm.selectAll)
+                      ? _vm._i(_vm.selectAll, null) > -1
+                      : _vm.selectAll
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.selectAll,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.selectAll = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.selectAll = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.selectAll = $$c
+                      }
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("th", [_vm._v("No.")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("S / C")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("D.F.")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("# Código")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Descripción del Tratamiento")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Estatus")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Imagen")])
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "tbody",
@@ -52746,36 +52822,35 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.checkedTreatments,
-                        expression: "checkedTreatments"
+                        value: _vm.selected,
+                        expression: "selected"
                       }
                     ],
-                    attrs: { type: "checkbox" },
+                    attrs: { type: "checkbox", number: "" },
                     domProps: {
                       value: treatment.id,
-                      checked: Array.isArray(_vm.checkedTreatments)
-                        ? _vm._i(_vm.checkedTreatments, treatment.id) > -1
-                        : _vm.checkedTreatments
+                      checked: Array.isArray(_vm.selected)
+                        ? _vm._i(_vm.selected, treatment.id) > -1
+                        : _vm.selected
                     },
                     on: {
                       change: function($event) {
-                        var $$a = _vm.checkedTreatments,
+                        var $$a = _vm.selected,
                           $$el = $event.target,
                           $$c = $$el.checked ? true : false
                         if (Array.isArray($$a)) {
                           var $$v = treatment.id,
                             $$i = _vm._i($$a, $$v)
                           if ($$el.checked) {
-                            $$i < 0 &&
-                              (_vm.checkedTreatments = $$a.concat([$$v]))
+                            $$i < 0 && (_vm.selected = $$a.concat([$$v]))
                           } else {
                             $$i > -1 &&
-                              (_vm.checkedTreatments = $$a
+                              (_vm.selected = $$a
                                 .slice(0, $$i)
                                 .concat($$a.slice($$i + 1)))
                           }
                         } else {
-                          _vm.checkedTreatments = $$c
+                          _vm.selected = $$c
                         }
                       }
                     }
@@ -52837,7 +52912,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.checkedTreatments.length > 0
+      _vm.selected.length > 0
         ? _c("div", { staticClass: "col-sm-12 text-center" }, [
             _c(
               "button",
@@ -52855,39 +52930,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "th-listado" }, [
-      _c("tr", [
-        _c("th", [
-          _c("input", {
-            staticClass: "selectAllTreatments",
-            attrs: { type: "checkbox" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("th", [_vm._v("No.")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("S / C")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("D.F.")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("# Código")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Descripción del Tratamiento")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Fecha")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Estatus")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Imagen")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53393,24 +53436,14 @@ if (false) {
 
 /***/ }),
 /* 122 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 123 */,
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(129)
+var __vue_script__ = __webpack_require__(123)
 /* template */
-var __vue_template__ = __webpack_require__(128)
+var __vue_template__ = __webpack_require__(124)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53449,7 +53482,48 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 128 */
+/* 123 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['treatment'],
+  data: function data() {
+    return {
+      price: this.treatment.price,
+      disabled: true
+    };
+  },
+
+  methods: {
+    edit: function edit(event) {
+      this.disabled = !this.disabled;
+      this.update();
+    },
+    update: function update() {
+      axios.post('/ajax/update-price', {
+        id: this.treatment.id,
+        price: this.price
+      }).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53522,45 +53596,10 @@ if (false) {
 }
 
 /***/ }),
-/* 129 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 125 */
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['treatment'],
-  data: function data() {
-    return {
-      price: this.treatment.price,
-      disabled: true
-    };
-  },
-
-  methods: {
-    edit: function edit(event) {
-      this.disabled = !this.disabled;
-      this.update();
-    },
-    update: function update() {
-      axios.post('/ajax/update-price', {
-        id: this.treatment.id,
-        price: this.price
-      }).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
-  }
-});
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
