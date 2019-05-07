@@ -280,6 +280,10 @@ class indexController extends Controller
         $pdf->SetFont('Arial','', 8);
         $pdf->SetXY(110, 245);
         $pdf->Multicell(80, 4, Auth::user()->doctor, 0, 'L');
+        //date
+        $pdf->SetFont('Arial','',8);
+        $pdf->SetXY(170, 247);
+        $pdf->Cell(15, 1, date("m/d/Y", strtotime($claim->created_at)), 0, 0, 'L');
         // 54.
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(112, 254.5);
