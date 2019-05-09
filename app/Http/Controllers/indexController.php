@@ -12,7 +12,8 @@ class indexController extends Controller
 {
     // redirect to index
     public function index() {
-      return view('index');
+      $patients = Patient::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->take(10)->get();
+      return view('index')->with('patients', $patients);
     }
 
     // search patients
