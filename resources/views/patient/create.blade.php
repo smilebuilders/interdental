@@ -11,13 +11,13 @@
 
         <div class="form-group">
           <label>Nombre(s)</label>
-          <input class="form-control" name="first_name" type="text" value="{{ old('first_name') }}">
+          <input class="form-control" name="first_name" type="text" value="{{ old('first_name') }}" required>
           <span class="text-danger">{{ $errors->first('first_name') }}</span>
         </div>
 
         <div class="form-group">
           <label>Apellido(s)</label>
-          <input class="form-control" name="last_name" type="text" value="{{ old('last_name') }}">
+          <input class="form-control" name="last_name" type="text" value="{{ old('last_name') }}" required>
           <span class="text-danger">{{ $errors->first('last_name') }}</span>
         </div>
 
@@ -64,7 +64,7 @@
 
         <div class="form-group">
           <label>Id Póliza</label>
-          <input class="form-control" name="policy_code" type="text" value="{{ old('policy_code') }}">
+          <input class="form-control" name="policy_code" type="text" value="{{ old('policy_code') }}" required>
           <span class="text-danger">{{ $errors->first('policy_code') }}</span>
         </div>
 

@@ -13,24 +13,18 @@ class patientController extends Controller
   
     public function create()
     {
-        // muestra la vista para crear un paciente 
         return view('patient.create');
     }
 
     public function store(StorePatient $request)
     {
-        // Se registra un nuevo paciente
+      
         $patient = new Patient;
         $patient->fill($request->all());
         $patient->user_id = $request->user()->id;
         $patient->save();
 
-        // Se crea la poliza correspondiente al usuario
-        $policy = new Policy();
-        $policy->code = $patient->policy_code;
-        $policy->patient_id = $patient->id;
-        $policy->user_id = $request->user()->id;
-        $policy->save();
+        Policy::create($patient);
 
         return redirect()->route('index')->with('message', 'Paciente creado correctamente');
     }

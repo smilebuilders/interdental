@@ -24,7 +24,6 @@ class StorePatient extends FormRequest
     public function rules()
     {
         return [
-            //
             'first_name' => 'required',
             'last_name' => 'required',
             'gender' => 'required',
