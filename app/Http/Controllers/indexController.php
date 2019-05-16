@@ -242,9 +242,9 @@ class indexController extends Controller
           $pdf->SetXY(132, 209);
           $pdf->Cell(3, 1, 'x', 0, 0, 'C');
         } else {
+          $pdf->SetFont('Arial','b', 10);
           $pdf->SetXY(110, 209);
           $pdf->Cell(3, 1, 'x', 0, 0, 'C');
-          $pdf->SetFont('Arial','b', 10);
         }
         // 43.
         if(!$claim->replacement_prosthesis) {
