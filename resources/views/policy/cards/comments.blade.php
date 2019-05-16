@@ -8,7 +8,7 @@
     @endif
   </div>
   
-  <form id="comments" class="" action="{{ route('policy_update', ['id'=> $patient->id]) }}" method="post">
+  <form id="comments" class="" action="{{ route('policy_update', ['id'=> $patient->policy]) }}" method="post">
     {{ csrf_field() }}
     <textarea name="comments" class="form-control"
       @if (Route::current()->getName() != 'policy_verify')

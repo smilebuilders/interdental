@@ -57,7 +57,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12 text-center">
-              <a class="btn btn-default" href="{{ route('policy_verify', [$patient->policy_code]) }}">Cancelar</a>
+              <a class="btn btn-default" href="{{ route('policy_verify', [$patient->id]) }}">Cancelar</a>
             <input type="submit" value="Guardar" class="btn btn-primary">
             <input type="hidden" value="{{ $patient->id }}" name="patient_id" required>
             <input type="hidden" value="{{ $patient->policy->id }}" name="policy_id" required>

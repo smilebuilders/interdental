@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
   });
   
   Route::prefix('policy')->group(function() {
-    Route::get('/verify/{policy_code}', 'policyController@verify')->name('policy_verify');
+    Route::get('/verify/{id}', 'policyController@verify')->name('policy_verify');
     Route::get('/pending', 'policyController@pendingVerification')->name('policies_pending');
 
     Route::get('/edit/{id}', 'policyController@edit')->name('policy_edit');

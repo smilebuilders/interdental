@@ -53,7 +53,7 @@ class patientController extends Controller
         $policy->code = $patient->policy_code;
         $policy->save();
 
-        return redirect()->route('policy_verify', ['policy_code' => $request->policy_code])->with('message', 'Paciente actualizado con éxito');
+        return redirect()->route('policy_verify', ['id' => $request->id])->with('message', 'Paciente actualizado con éxito');
     }
     public function benefits($id)
     {

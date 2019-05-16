@@ -16,7 +16,7 @@
     <tbody>
     @foreach($policies as $policy)
         <tr>
-            <td><a href="{{ route('policy_verify', ['policy_code' => $policy->code]) }}">{!! $policy->patient->first_name !!}</a></td>
+            <td><a href="{{ route('policy_verify', ['id' => $policy->patient_id]) }}">{!! $policy->patient->first_name !!}</a></td>
             <td>N/D</td>
             <td>{!! $policy->created_at->diffForHumans() !!}</td>
             {{-- <td class="text-center">Ricardo  J. Guevara</td> --}}

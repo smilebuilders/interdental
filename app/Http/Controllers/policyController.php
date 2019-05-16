@@ -8,10 +8,10 @@ use Auth;
 class policyController extends Controller
 {
     
-    public function verify($policy_code)
+    public function verify($id)
     {
         // retorna una poliza con el policy_code 
-        $policy = Policy::where('code', $policy_code)->first();
+        $policy = Policy::where('patient_id', $id)->first();
         return view('policy.verify')->with('policy', $policy);
     }
 
@@ -86,7 +86,7 @@ class policyController extends Controller
         $patient->policy_code = $policy->code;
         $patient->save();
 
-        return redirect()->route('policy_verify',[$policy->code])->with('message', 'Poliza actualizada con éxito');
+        return redirect()->route('policy_verify',[$policy->patient_id])->with('message', 'Poliza actualizada con éxito');
     }
 
     /**
