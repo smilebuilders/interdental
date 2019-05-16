@@ -45,7 +45,7 @@ class indexController extends Controller
       $pdf = new Fpdi();
       $pdf->AddPage();
       // set the source file
-      $pdf->setSourceFile("claim.pdf");
+      $pdf->setSourceFile("claim_form.pdf");
       // import page 1
       $tplId = $pdf->importPage(1);
       // use the imported page and place it at point 0,10 with a width of 210 mm
@@ -185,8 +185,8 @@ class indexController extends Controller
         $pdf->SetXY(94, $y);
         $pdf->Cell(15, 1, $treatment->treatment->code, 0, 0);
         // 30.
-        $pdf->SetFont('Arial','',7);
-        $pdf->SetXY(130, $y);
+        $pdf->SetFont('Arial','',6);
+        $pdf->SetXY(128, $y);
         $pdf->Cell(55, 1, $treatment->treatment->name, 0, 0);
         // 31.
         $pdf->SetFont('Arial','',8);
@@ -229,13 +229,13 @@ class indexController extends Controller
         $pdf->Cell(15, 1, date("m/d/Y", strtotime($claim->created_at)), 0, 0, 'L');
         
         // 38.
-        $pdf->SetFont('Arial','',8);
-        $pdf->SetXY(127, 197);
-        $pdf->Cell(3, 1, '11', 0, 0, 'C');
-        // 39.
-        $pdf->SetFont('Arial','b', 10);
-        $pdf->SetXY(179, 201);
+        $pdf->SetFont('Arial','b',8);
+        $pdf->SetXY(106.5, 200.5);
         $pdf->Cell(3, 1, 'x', 0, 0, 'C');
+        // 39.
+        $pdf->SetFont('Arial','', 7);
+        $pdf->SetXY(183, 202);
+        $pdf->Cell(3, 1, $claim->number_enclosures, 0, 0, 'C');
         // 40.
         if(!$claim->is_ortho) {
           $pdf->SetFont('Arial','b', 10);
