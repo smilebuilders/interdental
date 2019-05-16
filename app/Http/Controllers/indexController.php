@@ -206,7 +206,7 @@ class indexController extends Controller
         // 35.
         $pdf->SetFont('Arial','',8);
         $pdf->SetXY(10, 188);
-        $pdf->Cell(15, 1, $claim->remarks, 0, 0, 'L');
+        $pdf->Cell(15, 1, $claim->remarks . ' ' . $claim->nea, 0, 0, 'L');
 
         // 36.
         //signature
