@@ -37,7 +37,7 @@
 
       <input type="hidden" name="extracciones_previas" v-model="previusExtractions">
     </div>
-    <a class="btn btn-default" href="{{ route('policy_verify', [$policy->code]) }}">Cancelar</a>
+    <a class="btn btn-default" href="{{ route('policy_verify', [$policy->patient_id]) }}">Cancelar</a>
     <input id="btnGuardar" type="submit" value="Guardar" class="btn btn-primary">
   </form>
 </div>

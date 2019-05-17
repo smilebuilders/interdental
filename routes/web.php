@@ -7,11 +7,11 @@ Route::middleware(['auth'])->group(function () {
   Route::prefix('patient')->group(function () {
     Route::get('/create', 'patientController@create')->name('patient_create');
     Route::post('/store', 'patientController@store')->name('patient_store');
-    Route::get('/edit/{id}', 'patientController@edit')->name('patient_edit');
-    Route::post('/update/{id}', 'patientController@update')->name('patient_update');
+    Route::get('/edit/{patient}', 'patientController@edit')->name('patient_edit');
+    Route::post('/update/{patient}', 'patientController@update')->name('patient_update');
     Route::post('/delete/{id}', 'patientController@destroy')->name('patient_delete');
 
-    Route::get('/benefits/{id}', 'patientController@benefits')->name('patient_benefits');
+    Route::get('/benefits/{id}', 'patientController@updateBenefits')->name('patient_benefits');
     Route::get('/treatmets/{id}', 'patientController@treatments')->name('patient_treatments');
     Route::get('/claims/generated/{id}', 'claimController@generated')->name('patient_claims');
 

@@ -21,25 +21,19 @@ class patientController extends Controller
       
         $patient = new Patient;
         $patient->fill($request->all());
-        $patient->user_id = $request->user()->id;
-        $patient->save();
-
+        $patient->user_id = Auth::user()->id;        $patient->save();
         Policy::create($patient);
 
         return redirect()->route('index')->with('message', 'Paciente creado correctamente');
     }
 
-    public function edit($id)
+    public function edit(Patient $patient)
     {
-        // retorna la vista para editar paciente con los datos del paciente
-        $patient = Patient::find($id);
-        return view('policy.forms.patient')->with('patient', $patient);
+        return view('policy.forms.patient', compact($patient));
     }
     
-    public function update(StorePatient $request, $id)
+    public function update(StorePatient $request, Patient $patient)
     {
-        // Se guardan los cambios en el paciente
-        $patient = Patient::find($id);
         $patient->fill($request->all());
         $patient->save();
 
@@ -47,15 +41,14 @@ class patientController extends Controller
         $policy->code = $patient->policy_code;
         $policy->save();
 
-        return redirect()->route('policy_verify', ['id' => $request->id])->with('message', 'Paciente actualizado con éxito');
+        return redirect()->route('policy_verify', ['id' => $policy->patient_id])->with('message', 'Paciente actualizado con éxito');
     }
+
     public function benefits($id)
     {
       $policy = Policy::where('patient_id', $id)->first();
-      return view('patient.benefits')->with('policy', $policy);
+      return view('patient.benefits', compact($policy));
     }
-
-
 
     public function editBenefits($id) {
       $policy = Policy::find($id);
