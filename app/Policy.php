@@ -7,7 +7,7 @@ use Auth;
 
 class Policy extends Model
 {
-  protected $guard = ['id','patient_id'];
+  protected $guarded  = ['id'];
 
   public function patient()
   {
