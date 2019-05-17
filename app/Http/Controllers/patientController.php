@@ -29,7 +29,7 @@ class patientController extends Controller
 
     public function edit(Patient $patient)
     {
-        return view('policy.forms.patient', compact($patient));
+        return view('policy.forms.patient')->with('patient', $patient);
     }
     
     public function update(StorePatient $request, Patient $patient)
