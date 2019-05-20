@@ -55,7 +55,7 @@ class patientController extends Controller
     public function benefits($id)
     {
       $policy = Policy::where('patient_id', $id)->first();
-      return view('patient.benefits', compact($policy));
+      return view('patient.benefits', compact('policy'));
     }
 
     public function editBenefits($id) {
