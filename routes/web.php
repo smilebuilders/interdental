@@ -1,8 +1,11 @@
 <?php
 
-Route::get('/', 'indexController@index')->name('index')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
+  
+  Route::get('/', 'indexController@index')->name('index');
+  Route::get('/search', 'indexController@search')->name('patient_search'); 
+  
   
   Route::prefix('patient')->group(function () {
     Route::get('/create', 'patientController@create')->name('patient_create');
@@ -58,7 +61,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/change-status', 'claimController@changeStatus')->name('claim_change_status');
   });
   
-  Route::get('/search', 'indexController@search')->name('patient_search');
   Route::get('/report', 'indexController@report')->name('report');
   Route::get('/pdf/{claim_id}', 'indexController@pdf');
   

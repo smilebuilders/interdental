@@ -13,7 +13,9 @@ class patientController extends Controller
   
     public function create()
     {
+
         return view('patient.create');
+    
     }
 
     public function store(StorePatient $request)
@@ -21,19 +23,24 @@ class patientController extends Controller
       
         $patient = new Patient;
         $patient->fill($request->all());
-        $patient->user_id = Auth::user()->id;        $patient->save();
+        $patient->user_id = Auth::user()->id;        
+        $patient->save();
         Policy::create($patient);
 
         return redirect()->route('index')->with('message', 'Paciente creado correctamente');
+    
     }
 
     public function edit(Patient $patient)
     {
-        return view('policy.forms.patient')->with('patient', $patient);
+
+        return view('policy.forms.patient', compact('patient'));
+    
     }
     
     public function update(StorePatient $request, Patient $patient)
     {
+
         $patient->fill($request->all());
         $patient->save();
 
@@ -42,6 +49,7 @@ class patientController extends Controller
         $policy->save();
 
         return redirect()->route('policy_verify', ['id' => $policy->patient_id])->with('message', 'Paciente actualizado con éxito');
+    
     }
 
     public function benefits($id)

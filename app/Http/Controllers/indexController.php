@@ -10,27 +10,26 @@ use Auth;
 
 class indexController extends Controller
 {
-    // redirect to index
+
     public function index() {
-      $patients = Patient::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->take(10)->get();
-      return view('index')->with('patients', $patients);
+
+      $patients = Auth::user()->patients()->orderBy('created_at', 'DESC')->take(10)->get();
+      return view('index', compact('patients'));
+    
     }
 
-    // search patients
     public function search(Request $request)
     {
-      global $param;
-      $param = $request->param;
-      $patients = Patient::where('user_id', Auth::user()->id)
-      ->where(function($query) {
-        $query->where('first_name', $GLOBALS['param'])
-              ->orWhere('last_name', $GLOBALS['param']);
-      })->get();
 
-      return view('index')->with('patients', $patients);
+      $param = $request->param;
+      $patients = Auth::user()->patients()
+        ->where('first_name', $param)
+        ->orWhere('last_name', $param)->get();
+
+      return view('index', compact('patients'));
+
     }
 
-    // redirect to report
     public function report()
     {
       $claims = Claim::all();
