@@ -11,6 +11,7 @@ use Auth;
 class patientController extends Controller
 {
   
+  
     public function create()
     {
 
