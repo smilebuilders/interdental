@@ -47699,7 +47699,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             state: 1,
-            selected: "1",
+            selected: "diagnostic",
             treatments: [],
             currentTreatment: "",
             options: [],
@@ -47725,10 +47725,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get("/treatment/get/" + this.selected).then(function (response) {
                 return _this.treatments = response.data;
-            }).catch(function (error) {
-                console.log(error);
             });
         },
+
 
         // select current treatment for display info on state 2 
         nextState: function nextState(index) {
@@ -52007,51 +52006,57 @@ var render = function() {
                       }
                     },
                     [
-                      _c("option", { attrs: { value: "1" } }, [
-                        _vm._v("Diagnóstico")
+                      _c("option", { attrs: { value: "diagnostic" } }, [
+                        _vm._v("Diagnostic")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "2" } }, [
-                        _vm._v("Preventiva")
+                      _c("option", { attrs: { value: "preventive" } }, [
+                        _vm._v("Preventive")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "3" } }, [
-                        _vm._v("Restaurativo")
+                      _c("option", { attrs: { value: "restorative" } }, [
+                        _vm._v("Restorative")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "4" } }, [
-                        _vm._v("Endodoncia")
+                      _c("option", { attrs: { value: "endodontics" } }, [
+                        _vm._v("Endodontics")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "5" } }, [
-                        _vm._v("Periodoncia")
+                      _c("option", { attrs: { value: "Periodontics" } }, [
+                        _vm._v("Periodontics")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "6" } }, [
-                        _vm._v("Protesis Removible")
+                      _c(
+                        "option",
+                        { attrs: { value: "prosthodontics_removable" } },
+                        [_vm._v("Prosthodontics, removable")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "implant_services" } }, [
+                        _vm._v("Implant Services")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "7" } }, [
-                        _vm._v("Implantes")
+                      _c(
+                        "option",
+                        { attrs: { value: "prosthodontics_fixed" } },
+                        [_vm._v("Prosthodontics, fixed")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        { attrs: { value: "oral_maxilofacial_surgery" } },
+                        [_vm._v("Oral & Maxilofacial Surgery")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "orthodontics" } }, [
+                        _vm._v("Orthodontics")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "8" } }, [
-                        _vm._v("Protesis Fija")
+                      _c("option", { attrs: { value: "general_services" } }, [
+                        _vm._v("General Services")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "9" } }, [
-                        _vm._v("Oral Cirugias Maxilofaciales")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "10" } }, [
-                        _vm._v("Ortodoncia")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "11" } }, [
-                        _vm._v("Servicios Generales")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "12" } }, [
+                      _c("option", { attrs: { value: "mayor" } }, [
                         _vm._v("Mayor")
                       ])
                     ]

@@ -13,18 +13,18 @@
           <div class="form-group">
             <label for="tCategory">Categoria:</label>
             <select class="form-control" id="tCategory" name="tCategory" v-model="selected" v-on:change="getTreatments">
-              <option value="1">Diagnóstico</option>
-              <option value="2">Preventiva</option>
-              <option value="3">Restaurativo</option>
-              <option value="4">Endodoncia</option>
-              <option value="5">Periodoncia</option>
-              <option value="6">Protesis Removible</option>
-              <option value="7">Implantes</option>
-              <option value="8">Protesis Fija</option>
-              <option value="9">Oral Cirugias Maxilofaciales</option>
-              <option value="10">Ortodoncia</option>
-              <option value="11">Servicios Generales</option>
-              <option value="12">Mayor</option>
+              <option value="diagnostic">Diagnostic</option>
+              <option value="preventive">Preventive</option>
+              <option value="restorative">Restorative</option>
+              <option value="endodontics">Endodontics</option>
+              <option value="Periodontics">Periodontics</option>
+              <option value="prosthodontics_removable">Prosthodontics, removable</option>
+              <option value="implant_services">Implant Services</option>
+              <option value="prosthodontics_fixed">Prosthodontics, fixed</option>
+              <option value="oral_maxilofacial_surgery">Oral & Maxilofacial Surgery</option>
+              <option value="orthodontics">Orthodontics</option>
+              <option value="general_services">General Services</option>
+              <option value="mayor">Mayor</option>
             </select>
           </div>
           <div class="form-group">
@@ -104,7 +104,7 @@ export default {
     data() {
         return {
         state: 1,
-        selected: "1",
+        selected: "diagnostic",
         treatments: [],
         currentTreatment: "",
         options: [],
@@ -126,14 +126,10 @@ export default {
     methods: {
         // get all treatments with the selected category
         getTreatments() {
-            axios
-            .get("/treatment/get/" + this.selected)
+            axios.get("/treatment/get/" + this.selected)
             .then(response => (this.treatments = response.data))
-            .catch(function(error) {
-              console.log(error);
-            });
-            
         },
+
         // select current treatment for display info on state 2 
         nextState(index) {
             if($('.vdp-datepicker').attr("value") != "") {
