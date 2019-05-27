@@ -13,12 +13,17 @@ use Image;
 
 class treatmentController extends Controller
 {
-  
+
   // Retorna los tratamientos de la categoria recivida
   public function getCategoryTreatments($category)
   {
-    $treatments = Treatment::where('category', $category)->orderBy('code', 'ASC')->get();
+
+    $treatments = Treatment::where('category', $category)
+      ->orderBy('code', 'ASC')  
+      ->get();
+
     return response()->json($treatments, '200');
+  
   }
 
   public function store(Request $request)
