@@ -51490,7 +51490,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v(" Mesial\r\n          ")
+                _vm._v(" Mesial\n          ")
               ])
             ])
           ]),
@@ -51535,7 +51535,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v(" Distal\r\n          ")
+                _vm._v(" Distal\n          ")
               ])
             ])
           ]),
@@ -51580,7 +51580,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v(" Buccal\r\n          ")
+                _vm._v(" Buccal\n          ")
               ])
             ])
           ]),
@@ -51625,7 +51625,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v(" Lingual\r\n          ")
+                _vm._v(" Lingual\n          ")
               ])
             ])
           ]),
@@ -51670,7 +51670,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v(" Occlusal\r\n          ")
+                _vm._v(" Occlusal\n          ")
               ])
             ])
           ]),
@@ -51715,7 +51715,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v(" Facial\r\n          ")
+                _vm._v(" Facial\n          ")
               ])
             ])
           ]),
@@ -51760,7 +51760,7 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v(" Incisal\r\n          ")
+                _vm._v(" Incisal\n          ")
               ])
             ])
           ])
@@ -52822,44 +52822,46 @@ var render = function() {
             _vm._l(_vm.treatments, function(treatment) {
               return _c("tr", { key: treatment.id }, [
                 _c("td", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selected,
-                        expression: "selected"
-                      }
-                    ],
-                    attrs: { type: "checkbox", number: "" },
-                    domProps: {
-                      value: treatment.id,
-                      checked: Array.isArray(_vm.selected)
-                        ? _vm._i(_vm.selected, treatment.id) > -1
-                        : _vm.selected
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.selected,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = treatment.id,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 && (_vm.selected = $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              (_vm.selected = $$a
-                                .slice(0, $$i)
-                                .concat($$a.slice($$i + 1)))
+                  treatment.status == ""
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.selected,
+                            expression: "selected"
                           }
-                        } else {
-                          _vm.selected = $$c
+                        ],
+                        attrs: { type: "checkbox", number: "" },
+                        domProps: {
+                          value: treatment.id,
+                          checked: Array.isArray(_vm.selected)
+                            ? _vm._i(_vm.selected, treatment.id) > -1
+                            : _vm.selected
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.selected,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = treatment.id,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.selected = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.selected = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.selected = $$c
+                            }
+                          }
                         }
-                      }
-                    }
-                  })
+                      })
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(treatment.number))]),

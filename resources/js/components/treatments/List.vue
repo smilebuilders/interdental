@@ -19,7 +19,7 @@
     <tbody>
       <tr v-for="treatment in treatments" v-bind:key="treatment.id">
         <td>
-          <input type="checkbox" v-model="selected" :value="treatment.id" number>
+          <input type="checkbox" v-if="treatment.status == ''" v-model="selected" :value="treatment.id" number>
         </td>
         <td>{{treatment.number}}</td>
         <td>{{treatment.sc}}</td>
