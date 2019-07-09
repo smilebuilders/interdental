@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>Aseguradora:</td>
-                <td>Aetna</td>
+                <td>{{ $claim->patient->insurance->name }}</td>
             </tr>
             
             <tr>
