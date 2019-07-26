@@ -38,6 +38,10 @@
         <td>{{ $policy->patient->insurance->name }}</td>
       </tr>
       <tr>
+        <td>Telefono Aseguradora</td>
+        <td>{{ $policy->patient->insurance->phone }}</td>
+      </tr>
+      <tr>
         <td>IdUltramed</td>
         <td></td>
       </tr>

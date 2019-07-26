@@ -33,7 +33,7 @@ class indexController extends Controller
     public function report()
     {
       $claims = Claim::all();
-      return view('report')->with('claims', $claims);
+      return view('report', compact('claims'));
     }
 
     public function pdf(Request $request) {
