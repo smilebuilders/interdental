@@ -40,4 +40,9 @@
       @include('policy.cards.dependents')
     </div>
   </div>
+
+  <form action="{{ route('patient_delete', ['id' => $policy->patient->id]) }}" method="POST">
+    @csrf
+    <input class="btn btn-danger float-right" type="submit" value="Delete">
+  </form>
 @endsection

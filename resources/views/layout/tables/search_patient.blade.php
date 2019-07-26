@@ -18,7 +18,15 @@
       @if (isset($patients) && count($patients) > 0)
         @foreach ($patients as $patient)
           <tr>
-            <td><a href="{{ route('policy_verify', ['id' => $patient->id]) }}">{!! $patient->first_name . ' ' . $patient->last_name !!}</a></td>
+            <td>
+              @if ($patient->is_dependent)
+                {!! $patient->first_name . ' ' . $patient->last_name !!}                    
+              @else
+                <a href="{{ route('policy_verify', ['id' => $patient->id]) }}">
+                  {!! $patient->first_name . ' ' . $patient->last_name !!}
+                </a>
+              @endif
+            </td>
             <td>{!! $patient->nss !!}</td>
             <td>{!! $patient->birth_date !!}</td>
             <td>{!! $patient->ensurance !!}</td>
