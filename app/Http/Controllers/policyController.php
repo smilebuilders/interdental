@@ -10,7 +10,6 @@ class policyController extends Controller
     
     public function verify($id)
     {
-        // retorna una poliza con el policy_code 
         $policy = Policy::where('patient_id', $id)->first();
         return view('policy.verify')->with('policy', $policy);
     }

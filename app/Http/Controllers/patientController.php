@@ -90,9 +90,14 @@ class patientController extends Controller
     public function destroy($id)
     {
         $patient = Patient::find($id);
+        
+        foreach ($patient->dependents($id) as $dependent) {
+          $dependent->delete();
+        }
+
         $patient->delete();
 
-        return back();
+        return redirect('/');
     }
 
     public function treatments($id)
