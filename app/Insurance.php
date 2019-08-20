@@ -13,7 +13,7 @@ class Insurance extends Model
     }
 
     public static function getInsurances() {
-      $insurances = Insurance::all();
+      $insurances = Insurance::orderBy('name', 'ASC')->get();
       return $insurances;
     }
 
