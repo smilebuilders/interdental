@@ -10,7 +10,7 @@ use Auth;
 
 class indexController extends Controller
 {
-
+//s
     public function index() {
 
       $patients = Auth::user()->patients()->orderBy('created_at', 'DESC')->take(10)->get();
